@@ -6,3 +6,4 @@ sqlalchemy
 openpyxl
 dash-mantine-components
 dash-iconify
+dash-bootstrap-components
