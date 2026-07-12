@@ -15,7 +15,7 @@ DATABASE_URL = f"sqlite:///{DB_PATH}"
 # Creation du moteur SQLAlchemy
 engine = create_engine(
     DATABASE_URL,
-    echo=True,  # Affiche les requêtes SQL générées
+    echo= False,  # Affiche les requêtes SQL générées
     connect_args={"check_same_thread": False}  # Nécessaire pour SQLite avec SQLAlchemy
 )
 
