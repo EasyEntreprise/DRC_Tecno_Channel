@@ -1,0 +1,17 @@
+.btn-login:hover{
+    background-color: darkgrey;
+
+}
+
+.btn-inscript{
+    background-color: aqua;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-inscript :hover{
+    background-color: #163a5c;
+}

@@ -1,0 +1,147 @@
+body {
+
+    margin: 0;
+    padding: 0;
+
+    font-family: Arial, sans-serif;
+
+    background-color: #829099; /*#829099*/
+}
+
+/* Titre */
+H1{
+    text-align: center;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+
+    position: fixed; /*fixed*/
+
+    top: 0;
+    left: 0;
+
+    width: 260px;
+    height: 100vh;
+
+    /*background-color: #111827; #1f2937*/
+    background: linear-gradient(180deg, #0f172a, #1e293b);
+
+    padding: 20px;
+
+    color: white;
+
+    overflow-y: auto;
+    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
+}
+
+/* LOGO */
+
+.logo {
+
+    text-align: center;
+
+    margin-bottom: 20px;
+
+    color: white;
+}
+
+/* TEXTE NORMAL */
+.mantine-NavLink-label{
+    color: white;
+}
+
+.mantine-NavLink-label:hover {
+    color : #2563eb !important;
+}
+
+/* MENU */
+
+.sidebar-menu {
+
+    list-style: none;
+
+    padding: 0;
+}
+
+/* ITEM */
+
+.sidebar-menu li {
+
+    margin-bottom: 15px;
+}
+
+/* LINKS */
+
+.sidebar-link {
+
+    text-decoration: none;
+
+    color: white;
+
+    display: block;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    transition: 0.3s;
+}
+
+/* HOVER */
+
+.sidebar-link:hover {
+
+    background-color: #374151;
+}
+
+/* LOGOUT */
+
+.logout-link {
+
+    background-color: #dc2626;
+}
+
+.logout-link:hover {
+
+    background-color: #b91c1c;
+}
+
+/* CONTENU PRINCIPAL */
+
+.main-content {
+
+    margin-left: 270px;
+
+    padding: 20px;
+}
+
+.sidebar-nav .nav-link {
+    color: #F9FAFB !important;
+    font-weight: 500;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+/* SURVOL */
+
+.sidebar-nav .nav-link:hover {
+    background-color: #374151 !important;
+    color: #FFFFFF !important;
+}
+
+/* PAGE ACTIVE */
+
+.sidebar-nav .nav-link.active {
+    background-color: #2563EB !important;
+    color: #FFFFFF !important;
+}
+
+/* LOGOUT */
+
+.sidebar-nav .nav-link:last-child:hover {
+    background-color: #DC2626 !important;
+}
