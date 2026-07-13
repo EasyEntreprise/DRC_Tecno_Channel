@@ -690,7 +690,7 @@ def filtrer_et_analyser_donnees(debut, fin, produit, series, models):
     txt_badWeek  = f"{bad_week:,.2f} Pcs"
 
     ## Statistiques #####
-    statis_group = df_filtre.groupby("Date", as_index= False)["Purchased_Qty"].sum()
+    statis_group = df_filtre.groupby("Months", as_index= False)["Purchased_Qty"].sum()
     
     static_mean   = statis_group["Purchased_Qty"].mean()
     static_median = statis_group["Purchased_Qty"].median()
