@@ -241,7 +241,27 @@ def layout():
                                 children= dmc.Paper(
                                     children=[
                                         dmc.Text("Standard Deviation", c="dimmed", size= "sm"),
-                                        dmc.Text(id= "metric-mode", size="xl", fw=700),
+                                        dmc.Text(id= "metric-ecarTyp", size="xl", fw=700),
+                                    ], withBorder= True, p= "md", shadow= "xs",
+                                ),
+                            ),
+
+                            dmc.GridCol(
+                                span= 12,
+                                children= dmc.Paper(
+                                    children=[
+                                        dmc.Text("Maximum Value", c="dimmed", size= "sm"),
+                                        dmc.Text(id= "metric-max", size="xl", fw=700),
+                                    ], withBorder= True, p= "md", shadow= "xs",
+                                ),
+                            ),
+
+                            dmc.GridCol(
+                                span= 12,
+                                children= dmc.Paper(
+                                    children=[
+                                        dmc.Text("Minimum Value", c="dimmed", size= "sm"),
+                                        dmc.Text(id= "metric-min", size="xl", fw=700),
                                     ], withBorder= True, p= "md", shadow= "xs",
                                 ),
                             ),
@@ -615,7 +635,9 @@ def maj_liste_deroulanteThree(debut, fin):
         Output('metric-badWeek', 'children'),
         Output('metric-average', 'children'),
         Output('metric-median', 'children'),
-        Output('metric-mode', 'children'),
+        Output('metric-ecarTyp', 'children'),
+        Output('metric-max', 'children'),
+        Output('metric-min', 'children'),
 
         # Graphic
         Output('bar-channel', 'figure'),
@@ -692,9 +714,11 @@ def filtrer_et_analyser_donnees(debut, fin, produit, series, models):
     ## Statistiques #####
     statis_group = df_filtre.groupby("Months", as_index= False)["Purchased_Qty"].sum()
     
-    static_mean   = statis_group["Purchased_Qty"].mean()
-    static_median = statis_group["Purchased_Qty"].median()
+    static_mean        = statis_group["Purchased_Qty"].mean()
+    static_median      = statis_group["Purchased_Qty"].median()
     static_ecartType   = statis_group["Purchased_Qty"].std()
+    maximum            = statis_group["Purchased_Qty"].max()
+    minimum            = statis_group["Purchased_Qty"].min()
 
     ###################################
     # B. Graphique Bar pour Channel
@@ -808,7 +832,7 @@ def filtrer_et_analyser_donnees(debut, fin, produit, series, models):
     donnees_tableau = df_filtre.to_dict("records")
 
     # 4. Envoi simultané aux composants graphiques et métriques
-    return txt_achat, txt_invest, txt_bestWeek, txt_badWeek, static_mean, static_median, static_ecartType, fig_bar_channel, fig_pie_chan, fig_box_chan, fig_hist, fig_scatter, monthly_fig, weekly_fig, fig_bar_series, fig_pie_series, fig_bar_series_chan, model_line_fig, fig_bar_modelx_chan, model_weeks_fig, all_model_bar, all_model_pie, donnees_tableau
+    return txt_achat, txt_invest, txt_bestWeek, txt_badWeek, static_mean, static_median, static_ecartType, maximum, minimum, fig_bar_channel, fig_pie_chan, fig_box_chan, fig_hist, fig_scatter, monthly_fig, weekly_fig, fig_bar_series, fig_pie_series, fig_bar_series_chan, model_line_fig, fig_bar_modelx_chan, model_weeks_fig, all_model_bar, all_model_pie, donnees_tableau
 
 
 
