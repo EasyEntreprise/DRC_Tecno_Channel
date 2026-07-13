@@ -4,7 +4,6 @@ Ce fichier contiendra uniquement la mise en page (le layout) et les callbacks (l
 """
 import dash
 from dash import html, Input, Output, callback
-import dash_bootstrap_components as dbc
 import dash_mantine_components as dmc
 
 
