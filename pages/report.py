@@ -1477,7 +1477,7 @@ def layout():
                                 span= 12,
                                 children = dmc.Paper(
                                     children=[
-                                        dmc.Text("Manimum Value SD-SP", c="dimmed", size= "sm"),
+                                        dmc.Text("Minimum Value SD-SP", c="dimmed", size= "sm"),
                                         dmc.Text(id= "minim-sd-sp-old", size="xl", fw=700),
                                     ], 
                                     withBorder= True, p= "md", shadow= "xs",
@@ -1543,7 +1543,7 @@ def layout():
                                 span= 12,
                                 children = dmc.Paper(
                                     children=[
-                                        dmc.Text("Manimum Value SD-SP", c="dimmed", size= "sm"),
+                                        dmc.Text("Minimum Value SD-SP", c="dimmed", size= "sm"),
                                         dmc.Text(id= "minim-sd-sp-new", size="xl", fw=700),
                                     ], 
                                     withBorder= True, p= "md", shadow= "xs",

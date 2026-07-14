@@ -168,7 +168,7 @@ def filter_data_st_fp(debut_one, fin_one, debut_two, fin_two, produit_2):
  
 
     ## Statistiques #####
-    statis_st_fp_one    = df_filtre_st_fp_one.groupby("Date", as_index= False)["Purchased_Qty"].sum()
+    statis_st_fp_one    = df_filtre_st_fp_one.groupby("Months", as_index= False)["Purchased_Qty"].sum()
     
     moyenne_st_fp_one   = statis_st_fp_one["Purchased_Qty"].mean()
     mediane_st_fp_one   = statis_st_fp_one["Purchased_Qty"].median()
@@ -189,7 +189,7 @@ def filter_data_st_fp(debut_one, fin_one, debut_two, fin_two, produit_2):
     txt_badWeek_st_fp_two  = f"{bad_week_st_fp_two:,.2f} Pcs"
 
     ## Statistiques #####
-    statis_st_fp_two    = df_filtre_st_fp_two.groupby("Date", as_index= False)["Purchased_Qty"].sum()
+    statis_st_fp_two    = df_filtre_st_fp_two.groupby("Months", as_index= False)["Purchased_Qty"].sum()
     
     moyenne_st_fp_two   = statis_st_fp_two["Purchased_Qty"].mean()
     mediane_st_fp_two   = statis_st_fp_two["Purchased_Qty"].median()

@@ -1092,11 +1092,13 @@ def filter_data(debut, fin, produit, city, models, clients):
     monthly_sd.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 1180, height = 300)
 
     # 4. Graphic en Boite a moustache 
-    fig_boite_moust = px.box(df_filtre, x="Cities", y="Purchases_Qty", color="Cities", title="Purchases breakdown by City", points= "outliers")
-    fig_boite_moust.update_layout(height= 290, width= 445, margin=dict(l=20, r=20, t=50, b=20), paper_bgcolor = '#F8F9FA')
+    prime = df_filtre.groupby(["Cities", "Date"], as_index= False)["Purchases_Qty"].sum()
+    fig_boite_moust = px.box(prime, x="Cities", y="Purchases_Qty", color="Cities", title="Purchases breakdown by City", points= "outliers")
+    fig_boite_moust.update_layout(showlegend= False, height= 290, width= 445, margin=dict(l=20, r=20, t=50, b=20), paper_bgcolor = '#F8F9FA')
 
     # 5. Graphic en Histogramme 
-    fig_hist_spD = px.histogram(df_filtre, x= "Purchases_Qty", color="Cities", nbins= 10, title="Breakdown of Purchased Qty", barmode= "overlay")
+    prime_sd = df_filtre.groupby("Customers_Name", as_index= False)["Purchases_Qty"].sum()
+    fig_hist_spD = px.histogram(prime_sd, x= "Purchases_Qty", nbins= 30, title="Breakdown of Purchased Qty", labels= {"Purchased_Qty":"Purchasesd Quantity"})
     fig_hist_spD.update_layout(height= 290, width= 445, xaxis_title= "Purchases Qty", yaxis_title = "Frequency", margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA')
 
     # 6. Graphique en nuage au point pour comparer les prix par rappor a la vente

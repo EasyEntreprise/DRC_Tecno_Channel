@@ -658,22 +658,24 @@ def filtrer_et_analyser_donnees(debut, fin, produit, models):
     fig_pie_chan.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', title_font= dict(size= 16), font= dict(size= 8), width = 280, height = 280)
 
     # B.3. Graphique en boite a moustache
-    fig_box_chan = px.box(df_filtre, x="City", y="Purchased_Qty", color="City", title="Purchases breakdown by City", points= "outliers")
-    fig_box_chan.update_layout(height= 360, width= 400, margin=dict(l=20, r=20, t=50, b=20), paper_bgcolor = '#F8F9FA')
+    prime = df_filtre.groupby(["City", "Date"], as_index= False)["Purchased_Qty"].sum()
+    fig_box_chan = px.box(prime, x="City", y="Purchased_Qty", color="City", title="Purchases breakdown by City", points= "outliers")
+    fig_box_chan.update_layout(showlegend= False, height= 360, width= 400, margin=dict(l=20, r=20, t=50, b=20), paper_bgcolor = '#F8F9FA')
 
     # B.4. Graphique en Histogram pour channel
-    fig_hist = px.histogram(df_filtre, x= "Purchased_Qty", color="City", nbins= 10, title="Breakdown of Purchased Qty", barmode= "overlay")
+    prime_city = df_filtre.groupby("Date", as_index= False)["Purchased_Qty"].sum()
+    fig_hist = px.histogram(prime_city, x= "Purchased_Qty", nbins= 30, title="Breakdown of Purchased Qty", labels= {"Purchased_Qty":"Purchasesd Quantity"})
     fig_hist.update_layout(height= 360, width= 470, xaxis_title= "Purchased Qty", yaxis_title = "Frequency", margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA')
 
     # B.5. Graphique en nuage au point pour comparer les prix par rappor a la vente
     
     #df_model = df_all_model.groupby(["Products", "Prices_usd"], as_index= False)["Purchased_Qty"].sum()
-    df_model = (df_all_model.groupby(["Weeks", "Products"]).agg({"Prices_usd":"mean", "Purchased_Qty":"sum"}).reset_index())
+    df_model = (df_all_model.groupby(["Months", "Products"]).agg({"Prices_usd":"mean", "Purchased_Qty":"sum"}).reset_index())
     fig_scatter = px.scatter(
         df_model,
         x= "Prices_usd",
         y= "Purchased_Qty",
-        text= "Weeks",
+        text= "Months",
         hover_data= ["Products"],
         title= f"Price vs Purchase - {produit}"
     )
