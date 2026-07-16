@@ -45,8 +45,8 @@ mois_str = str(mois)
 # Convertir en date
 st_data_sp["Date"] = pd.to_datetime(st_data_sp["Date"])
 st_data_fp["Date"] = pd.to_datetime(st_data_fp["Date"])
-sd_data_sp["Date"] = pd.to_datetime(sd_data_sp["Date"])
-sd_data_fp["Date"] = pd.to_datetime(sd_data_fp["Date"])
+sd_data_sp["Date"] = pd.to_datetime(sd_data_sp["Date"], errors="coerce")
+sd_data_fp["Date"] = pd.to_datetime(sd_data_fp["Date"], errors="coerce")
 
 
 # Considerons seulement les donnees pour l'annee en cours pour nos ST et SD

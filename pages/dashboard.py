@@ -43,8 +43,8 @@ mois_str = str(mois)
 # Convertir en date
 st_data_sp["Date"] = pd.to_datetime(st_data_sp["Date"]).dt.date
 st_data_fp["Date"] = pd.to_datetime(st_data_fp["Date"]).dt.date
-sd_data_sp["Date"] = pd.to_datetime(sd_data_sp["Date"]).dt.date
-sd_data_fp["Date"] = pd.to_datetime(sd_data_fp["Date"]).dt.date
+sd_data_sp["Date"] = pd.to_datetime(sd_data_sp["Date"], errors="coerce").dt.date
+sd_data_fp["Date"] = pd.to_datetime(sd_data_fp["Date"], errors="coerce").dt.date
 
 # Extraire le mois
 st_data_sp["Monthly"] = pd.to_datetime(st_data_sp["Months"]).dt.month

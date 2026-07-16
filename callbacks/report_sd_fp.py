@@ -10,7 +10,7 @@ from database.connectDB import engine
 from database.data import sd_data_fp
 
 # Convertir en date
-sd_data_fp["Date"] = pd.to_datetime(sd_data_fp["Date"])
+sd_data_fp["Date"] = pd.to_datetime(sd_data_fp["Date"], errors="coerce")
 
 
 # ==========================================

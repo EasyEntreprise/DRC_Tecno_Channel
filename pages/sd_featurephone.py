@@ -37,7 +37,7 @@ mois  = datetime.now().month
 mois_str = str(mois)
 
 # Convertir en date
-sd_data_fp["Date"] = pd.to_datetime(sd_data_fp["Date"])
+sd_data_fp["Date"] = pd.to_datetime(sd_data_fp["Date"], errors="coerce")
 
 tableau  = sd_data_fp.groupby(["Cities", "Customers_Name"], as_index= False)["Purchases_Qty"].sum()
 tableau2 = sd_data_fp.groupby(["Customers_Name", "Products"], as_index= False)["Purchases_Qty"].sum()

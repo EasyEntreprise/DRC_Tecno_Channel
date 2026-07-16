@@ -2,6 +2,8 @@
 import pandas as pd
 from database.connectDB import engine
 from sqlalchemy import text
+from datetime import datetime
+
 
 
 ################################
@@ -54,8 +56,18 @@ def insert_sd_fp_data():
 
                     params = row.to_dict()
 
-                    if pd.notna(params["Date"]):
-                        params["Date"] = params["Date"].strftime("%Y-%m-%d")
+                    #if pd.notna(params["Date"]):
+                        #params["Date"] = params["Date"].strftime("%Y-%m-%d")
+
+                    if "Date" in params and pd.notna(params["Date"]):
+                        # Si c'est déjà un Timestamp ou un datetime
+                        if isinstance(params["Date"], (pd.Timestamp, datetime)):
+                            params["Date"] = params["Date"].strftime("%Y-%m-%d")
+                        
+                        else:
+                            # Si c'est une chaîne venant d'Excel
+                            params["Date"] = pd.to_datetime(params["Date"]).strftime("%Y-%m-%d")
+
 
                     conn.execute(sql_sd_fp, params)
 
@@ -128,8 +140,17 @@ def insert_sd_sp_data():
 
                     params = row.to_dict()
 
-                    if pd.notna(params["Date"]):
-                        params["Date"] = params["Date"].strftime("%Y-%m-%d")
+                    #if pd.notna(params["Date"]):
+                        #params["Date"] = params["Date"].strftime("%Y-%m-%d")
+
+                    if "Date" in params and pd.notna(params["Date"]):
+                        # Si c'est déjà un Timestamp ou un datetime
+                        if isinstance(params["Date"], (pd.Timestamp, datetime)):
+                            params["Date"] = params["Date"].strftime("%Y-%m-%d")
+                        
+                        else:
+                            # Si c'est une chaîne venant d'Excel
+                            params["Date"] = pd.to_datetime(params["Date"]).strftime("%Y-%m-%d")
 
                     conn.execute(sql_sd_sp, params)
 
@@ -197,10 +218,19 @@ def insert_st_fp_data():
 
                     params = row.to_dict()
         
-                    if pd.notna(params["Date"]):
-                        params["Date"] = params["Date"].strftime("%Y-%m-%d")
+                    #if pd.notna(params["Date"]):
+                        #params["Date"] = params["Date"].strftime("%Y-%m-%d")
 
-                    if pd.notna(params["Months"]):
+                    if "Date" in params and pd.notna(params["Date"]):
+                        # Si c'est déjà un Timestamp ou un datetime
+                        if isinstance(params["Date"], (pd.Timestamp, datetime)):
+                            params["Date"] = params["Date"].strftime("%Y-%m-%d")
+                        
+                        else:
+                            # Si c'est une chaîne venant d'Excel
+                            params["Date"] = pd.to_datetime(params["Date"]).strftime("%Y-%m-%d")
+
+                    if "Months" in params and pd.notna(params["Months"]):
                         params["Months"] = params["Months"].strftime("%Y-%m-%d")
 
                     conn.execute(sql, params)
@@ -272,8 +302,17 @@ def insert_st_sp_data():
 
                     params = row.to_dict()
 
-                    if pd.notna(params["Date"]):
-                        params["Date"] = params["Date"].strftime("%Y-%m-%d")
+                    #if pd.notna(params["Date"]):
+                        #params["Date"] = params["Date"].strftime("%Y-%m-%d")
+
+                    if "Date" in params and pd.notna(params["Date"]):
+                        # Si c'est déjà un Timestamp ou un datetime
+                        if isinstance(params["Date"], (pd.Timestamp, datetime)):
+                            params["Date"] = params["Date"].strftime("%Y-%m-%d")
+                        
+                        else:
+                            # Si c'est une chaîne venant d'Excel
+                            params["Date"] = pd.to_datetime(params["Date"]).strftime("%Y-%m-%d")
 
                     if pd.notna(params["Months"]):
                         params["Months"] = params["Months"].strftime("%Y-%m-%d")
