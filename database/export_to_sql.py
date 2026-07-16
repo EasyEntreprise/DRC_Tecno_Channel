@@ -11,17 +11,17 @@ from sqlalchemy import text
 def insert_sd_fp_data():
     try:
         # Lecture du fichier Excel
-        df_excel = pd.read_excel("data/Tecno_FP_SD_dataset.xlsx")
+        df_excel_sd_fp = pd.read_excel("data/Tecno_FP_SD_dataset.xlsx")
 
         # Lecture de la table SQL
         try:
-            df_sql = pd.read_sql(
+            df_sql_sd_fp = pd.read_sql(
                 text("SELECT Id FROM SD_tecno_FP_data"),
                 con=engine
             )
         except:
             # Si la table n'existe pas
-            df_excel.to_sql(
+            df_excel_sd_fp.to_sql(
                 "SD_tecno_FP_data",
                 con=engine,
                 if_exists="replace",
@@ -31,13 +31,13 @@ def insert_sd_fp_data():
             exit()
 
         # Colonnes à mettre à jour (toutes sauf Id)
-        colonnes = [c for c in df_excel.columns if c != "Id"]
+        colonnes = [c for c in df_excel_sd_fp.columns if c != "Id"]
 
         with engine.begin() as conn:
 
-            for _, row in df_excel.iterrows():
+            for _, row in df_excel_sd_fp.iterrows():
 
-                ids_sql = set(df_sql["Id"])
+                ids_sql = set(df_sql_sd_fp["Id"])
 
                 if row["Id"] in ids_sql:
 
@@ -46,7 +46,7 @@ def insert_sd_fp_data():
                         [f"{col}=:{col}" for col in colonnes]
                     )
 
-                    sql = text(f"""
+                    sql_sd_fp = text(f"""
                         UPDATE SD_tecno_FP_data
                         SET {set_clause}
                         WHERE Id=:Id
@@ -57,7 +57,7 @@ def insert_sd_fp_data():
                     if pd.notna(params["Date"]):
                         params["Date"] = params["Date"].strftime("%Y-%m-%d")
 
-                    conn.execute(sql, params)
+                    conn.execute(sql_sd_fp, params)
 
                 else:
 
@@ -67,6 +67,8 @@ def insert_sd_fp_data():
                         if_exists="append",
                         index=False
                     )
+
+        return True
 
     except Exception as e:
         return f"Erreur lors de l'insertion : {str(e)}"
@@ -81,19 +83,19 @@ def insert_sd_sp_data():
 
     try:
         # Lecture du fichier Excel
-        df_excel = pd.read_excel("data/Tecno_SP_SD_dataset.xlsx")
+        df_excel_sd_sp = pd.read_excel("data/Tecno_SP_SD_dataset.xlsx")
 
         #df_excel["Date"] = pd.to_datetime(df_excel["Date"]).dt.strftime("%Y-%m-%d")
 
         # Lecture de la table SQL
         try:
-            df_sql = pd.read_sql(
+            df_sql_sd_sp = pd.read_sql(
                 text("SELECT Id FROM SD_tecno_SP_data"),
                 con=engine
             )
         except:
             # Si la table n'existe pas
-            df_excel.to_sql(
+            df_excel_sd_sp.to_sql(
                 "SD_tecno_SP_data",
                 con=engine,
                 if_exists="replace",
@@ -107,18 +109,18 @@ def insert_sd_sp_data():
 
         with engine.begin() as conn:
 
-            for _, row in df_excel.iterrows():
+            for _, row in df_excel_sd_sp.iterrows():
 
-                ids_sql = set(df_sql["Id"])
+                ids_sql = set(df_sql_sd_sp["Id"])
 
-                if row["Id"] in ids_sql:
+                if row["Id"] in ids_sql_sd_sp:
 
                     # Construction automatique du SET
                     set_clause = ", ".join(
                         [f"{col}=:{col}" for col in colonnes]
                     )
 
-                    sql = text(f"""
+                    sql_sd_sp = text(f"""
                         UPDATE SD_tecno_SP_data
                         SET {set_clause}
                         WHERE Id=:Id
@@ -129,7 +131,7 @@ def insert_sd_sp_data():
                     if pd.notna(params["Date"]):
                         params["Date"] = params["Date"].strftime("%Y-%m-%d")
 
-                    conn.execute(sql, params)
+                    conn.execute(sql_sd_sp, params)
 
                 else:
 
@@ -139,6 +141,8 @@ def insert_sd_sp_data():
                         if_exists="append",
                         index=False
                     )
+
+        return True
 
     except Exception as e:
         return f"Erreur lors de l'insertion : {str(e)}"
@@ -210,6 +214,8 @@ def insert_st_fp_data():
                         index=False
                     )
 
+        return True
+
         print("Synchronization complete !")
     except Exception as e:
         return f"Erreur lors de l'insertion : {str(e)}"
@@ -223,17 +229,17 @@ def insert_st_sp_data():
 
     try:
         # Lecture du fichier Excel
-        df_excel = pd.read_excel("data/Tecno_SP_ST_dataset.xlsx")
+        df_excel_st_sp = pd.read_excel("data/Tecno_SP_ST_dataset.xlsx")
 
         # Lecture de la table SQL
         try:
-            df_sql = pd.read_sql(
+            df_sql_st_sp = pd.read_sql(
                 text("SELECT Id FROM ST_tecno_SP_data"),
                 con=engine
             )
         except:
             # Si la table n'existe pas
-            df_excel.to_sql(
+            df_excel_st_sp.to_sql(
                 "ST_tecno_SP_data",
                 con=engine,
                 if_exists="replace",
@@ -243,22 +249,22 @@ def insert_st_sp_data():
             exit()
 
         # Colonnes à mettre à jour (toutes sauf Id)
-        colonnes = [c for c in df_excel.columns if c != "Id"]
+        colonnes = [c for c in df_excel_st_sp.columns if c != "Id"]
 
         with engine.begin() as conn:
 
-            for _, row in df_excel.iterrows():
+            for _, row in df_excel_st_sp.iterrows():
 
-                ids_sql = set(df_sql["Id"])
+                ids_sql_st_sp = set(df_sql_st_sp["Id"])
 
-                if row["Id"] in ids_sql:
+                if row["Id"] in ids_sql_st_sp:
 
                     # Construction automatique du SET
                     set_clause = ", ".join(
                         [f"{col}=:{col}" for col in colonnes]
                     )
 
-                    sql = text(f"""
+                    sql_st_sp = text(f"""
                         UPDATE ST_tecno_SP_data
                         SET {set_clause}
                         WHERE Id=:Id
@@ -272,7 +278,7 @@ def insert_st_sp_data():
                     if pd.notna(params["Months"]):
                         params["Months"] = params["Months"].strftime("%Y-%m-%d")
 
-                    conn.execute(sql, params)
+                    conn.execute(sql_st_sp, params)
 
                 else:
 
@@ -282,5 +288,7 @@ def insert_st_sp_data():
                         if_exists="append",
                         index=False
                     )
+        return True
+    
     except Exception as e:
         return f"Erreur lors de l'insertion : {str(e)}"

@@ -102,6 +102,7 @@ def trigger_insertion_sd_fp(n_clicks):
         return dash.no_update
     try:
         success = insert_sd_fp_data()
+        print(success)
         if success:
             return generate_dmc_alert("Les données Sub-Dealer Feature Phone ont été insérées avec succès !", "green", "Succès !")
         return generate_dmc_alert("L'insertion a échoué. Veuillez vérifier les fichiers sources.", "red", "Erreur")
