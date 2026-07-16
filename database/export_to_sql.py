@@ -105,13 +105,13 @@ def insert_sd_sp_data():
             exit()
 
         # Colonnes à mettre à jour (toutes sauf Id)
-        colonnes = [c for c in df_excel.columns if c != "Id"]
+        colonnes = [c for c in df_excel_sd_sp.columns if c != "Id"]
 
         with engine.begin() as conn:
 
             for _, row in df_excel_sd_sp.iterrows():
 
-                ids_sql = set(df_sql_sd_sp["Id"])
+                ids_sql_sd_sp = set(df_sql_sd_sp["Id"])
 
                 if row["Id"] in ids_sql_sd_sp:
 
