@@ -38,7 +38,7 @@ mois  = datetime.now().month
 mois_str = str(mois)
 
 # Convertir en date
-st_data_sp["Date"] = pd.to_datetime(st_data_sp["Date"])
+st_data_sp["Date"] = pd.to_datetime(st_data_sp["Date"], errors="coerce")
 
 
 

@@ -10,7 +10,7 @@ import pandas as pd
 from database.data import st_data_sp
 
 # Convertir en date
-st_data_sp["Date"] = pd.to_datetime(st_data_sp["Date"])
+st_data_sp["Date"] = pd.to_datetime(st_data_sp["Date"], errors="coerce")
 
 
 #############

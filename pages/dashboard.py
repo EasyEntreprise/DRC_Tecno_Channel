@@ -41,16 +41,16 @@ mois  = datetime.now().month
 mois_str = str(mois)
 
 # Convertir en date
-st_data_sp["Date"] = pd.to_datetime(st_data_sp["Date"]).dt.date
-st_data_fp["Date"] = pd.to_datetime(st_data_fp["Date"]).dt.date
+st_data_sp["Date"] = pd.to_datetime(st_data_sp["Date"], errors="coerce").dt.date
+st_data_fp["Date"] = pd.to_datetime(st_data_fp["Date"], errors="coerce").dt.date
 sd_data_sp["Date"] = pd.to_datetime(sd_data_sp["Date"], errors="coerce").dt.date
 sd_data_fp["Date"] = pd.to_datetime(sd_data_fp["Date"], errors="coerce").dt.date
 
 # Extraire le mois
-st_data_sp["Monthly"] = pd.to_datetime(st_data_sp["Months"]).dt.month
-st_data_fp["Monthly"] = pd.to_datetime(st_data_fp["Months"]).dt.month
-sd_data_sp["Monthly"] = pd.to_datetime(sd_data_sp["Date"]).dt.month
-sd_data_fp["Monthly"] = pd.to_datetime(sd_data_fp["Date"]).dt.month
+st_data_sp["Monthly"] = pd.to_datetime(st_data_sp["Months"], errors="coerce").dt.month
+st_data_fp["Monthly"] = pd.to_datetime(st_data_fp["Months"], errors="coerce").dt.month
+sd_data_sp["Monthly"] = pd.to_datetime(sd_data_sp["Date"], errors="coerce").dt.month
+sd_data_fp["Monthly"] = pd.to_datetime(sd_data_fp["Date"], errors="coerce").dt.month
 
 # Considerons seulement les donnees pour l'annee en cours pour nos ST et SD
 year_st_sp = st_data_sp[st_data_sp["Years"] == annee_str]
