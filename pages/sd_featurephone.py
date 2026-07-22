@@ -589,6 +589,50 @@ def layout():
                         withBorder= True, p="md", style={**style_boite, "height": "300px"}
                     )
                 ),
+
+                dmc.GridCol(
+                    span = 8,
+                    children = dmc.Paper(
+                        children = [
+                            #"Graphique en Bar qui afficher les marches par city"
+                            dcc.Graph(id = "sd-bar-by-marketCity_fp")
+                        ],
+                        withBorder= True, p="md", style={**style_boite, "height": "300px"}
+                    )
+                ),
+
+                dmc.GridCol(
+                    span = 4,
+                    children = dmc.Paper(
+                        children = [
+                            #"Graphique en Pie qui afficher les clients du city"
+                            dcc.Graph(id = "sd-pie-by-marketCity_fp")
+                        ],
+                        withBorder= True, p="md", style={**style_boite, "height": "300px"}
+                    )
+                ),
+
+                dmc.GridCol(
+                    span = 8,
+                    children = dmc.Paper(
+                        children = [
+                            #"Graphique en Bar qui afficher les marches par city choisi"
+                            dcc.Graph(id = "sd-bar-by-marketCityChoose_fp")
+                        ],
+                        withBorder= True, p="md", style={**style_boite, "height": "300px"}
+                    )
+                ),
+                
+                dmc.GridCol(
+                    span = 4,
+                    children = dmc.Paper(
+                        children = [
+                            #"Graphique en Pie qui afficher les clients du city choisi"
+                            dcc.Graph(id = "sd-pie-by-marketCityChoose_fp")
+                        ],
+                        withBorder= True, p="md", style={**style_boite, "height": "300px"}
+                    )
+                ),
             ]
         ),
 
@@ -973,6 +1017,10 @@ def maj_liste_deroulanteFour_sp(debut, fin):
         Output('sd-line-annee_fp', 'figure'),
         Output('sd-line-achat_fp', 'figure'),
         Output('sd-bar-models_fp', 'figure'),
+        Output('sd-bar-by-marketCity_fp', 'figure'),
+        Output('sd-pie-by-marketCity_fp', 'figure'),
+        Output('sd-bar-by-marketCityChoose_fp', 'figure'),
+        Output('sd-pie-by-marketCityChoose_fp', 'figure'),
 
         # Tableau
         Output('tableau-client-qty_fp', 'data'),
@@ -1121,6 +1169,42 @@ def filter_data(debut, fin, produit, city, models, clients):
     fig_bar_citySelect.update_layout(margin=dict(l=20, r=20, t=40, b=20), paper_bgcolor = '#F8F9FA', showlegend= False, width = 590, height = 290)
     fig_bar_citySelect.update_xaxes(tickfont = dict(size= 8))
 
+    # 7.1. Graphique en Bar pour afficher touts les markets
+    markets = df_filtre.groupby("Market", as_index= False)["Purchases_Qty"].sum()
+    fig_bar_market = px.bar(markets, x="Market", y="Purchases_Qty", color="Market", text="Purchases_Qty", title="Markets Situation")
+    fig_bar_market.update_traces(textposition = 'outside')
+    fig_bar_market.update_layout(margin=dict(l=20, r=20, t=40, b=20), paper_bgcolor = '#F8F9FA', showlegend= False, width = 590, height = 290)
+    fig_bar_market.update_xaxes(tickfont = dict(size= 8))
+
+    # 7.2. Graphique en Pie pour afficher touts les markets
+    fig_pie_market = go.Figure(data = [go.Pie(labels = markets["Market"], values= markets["Purchases_Qty"], hole = 0.4, textinfo= "none", hoverinfo="skip", title = "Proportions for SD by Market", opacity=0.5)])
+    fig_pie_market.update_traces (
+            textinfo = "none", # Ne rien afficher sur le graphic
+            hovertemplate = "<b>%{label}</b><br>"
+                            "Ventes : %{value}<br>"
+                            "Pourcentage : %{percent}<extra></extra>" 
+            )
+    fig_pie_market.update_layout(showlegend= False, margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', title_font= dict(size= 8), font= dict(size= 8), width = 290, height = 280)
+
+    # 7.3. Graphique en Bar pour afficher les SD selon la city choisie
+    market_choose = df_city_sd.groupby("Market", as_index= False)["Purchases_Qty"].sum()
+    fig_bar_marketSelect = px.bar(market_choose, x="Market", y="Purchases_Qty", color="Market", text="Purchases_Qty", title="Markets Situation")
+    fig_bar_marketSelect.update_traces(textposition = 'outside')
+    fig_bar_marketSelect.update_layout(margin=dict(l=20, r=20, t=40, b=20), paper_bgcolor = '#F8F9FA', showlegend= False, width = 590, height = 290)
+    fig_bar_marketSelect.update_xaxes(tickfont = dict(size= 8))
+
+
+    # 7.4. Graphique en Pie pour afficher les SD selon la city choisie
+    
+    fig_pie_marketSelect = go.Figure(data = [go.Pie(labels = market_choose["Market"], values= market_choose["Purchases_Qty"], hole = 0.4, textinfo= "none", hoverinfo="skip", title = "Proportions by Market", opacity=0.5)])
+    fig_pie_marketSelect.update_traces (
+            textinfo = "none", # Ne rien afficher sur le graphic
+            hovertemplate = "<b>%{label}</b><br>"
+                            "Ventes : %{value}<br>"
+                            "Pourcentage : %{percent}<extra></extra>" 
+            )
+    fig_pie_marketSelect.update_layout(showlegend= False, margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', title_font= dict(size= 8), font= dict(size= 8), width = 290, height = 280)
+    
 
     # 8. Graphique en Pie pour afficher les SD selon la city choisie
     fig_pie_citySelect = go.Figure(data = [go.Pie(labels = city_choose["Customers_Name"], values= city_choose["Purchases_Qty"], hole = 0.4, textinfo= "none", hoverinfo="skip", title = "Proportions for SD by city", opacity=0.5)])
@@ -1208,7 +1292,7 @@ def filter_data(debut, fin, produit, city, models, clients):
     donnees_tableau3 = df_filtre.to_dict("records")
 
     # 4. Envoi simultané aux composants graphiques et métriques
-    return kinshasa, katanga, kcongo, bkasai, bequator, total_sd, total_somme, total_revenu, kin, kat, kc, bk, be, static_mean_spSD, static_median_spSD, static_ecartT, maximum, minimum, sd_name, sd_purchase, sd_revenu, fig_bar_city, fig_pie_city, monthly_sd, fig_boite_moust, fig_hist_spD, fig_scatter, fig_bar_citySelect, fig_pie_citySelect, fig_pie_allSD, fig_bar_models, fig_line_modelMulti, fig_profil, sd_years_line, client_line_model, client_bar_models, donnees_tableau, donnees_tableau2, donnees_tableau3
+    return kinshasa, katanga, kcongo, bkasai, bequator, total_sd, total_somme, total_revenu, kin, kat, kc, bk, be, static_mean_spSD, static_median_spSD, static_ecartT, maximum, minimum, sd_name, sd_purchase, sd_revenu, fig_bar_city, fig_pie_city, monthly_sd, fig_boite_moust, fig_hist_spD, fig_scatter, fig_bar_citySelect, fig_pie_citySelect, fig_pie_allSD, fig_bar_models, fig_line_modelMulti, fig_profil, sd_years_line, client_line_model, client_bar_models, fig_bar_market, fig_pie_market, fig_bar_marketSelect, fig_pie_marketSelect, donnees_tableau, donnees_tableau2, donnees_tableau3
                                                                                                                                                                                               
 
 
