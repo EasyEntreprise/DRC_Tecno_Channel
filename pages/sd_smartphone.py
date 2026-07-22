@@ -1214,7 +1214,7 @@ def filter_data(debut, fin, produit, city, models, clients):
     markets = df_filtre.groupby("Market", as_index= False)["Purchases_Qty"].sum()
     fig_bar_market = px.bar(markets, x="Market", y="Purchases_Qty", color="Market", text="Purchases_Qty", title="Markets Situation")
     fig_bar_market.update_traces(textposition = 'outside')
-    fig_bar_market.update_layout(margin=dict(l=20, r=20, t=40, b=20), paper_bgcolor = '#F8F9FA', showlegend= False, width = 590, height = 290)
+    fig_bar_market.update_layout(margin=dict(l=20, r=20, t=40, b=20), paper_bgcolor = '#F8F9FA', showlegend= False, width = 790, height = 290)
     fig_bar_market.update_xaxes(tickfont = dict(size= 8))
     
     # 7.2. Graphique en Pie pour afficher touts les markets
@@ -1225,13 +1225,13 @@ def filter_data(debut, fin, produit, city, models, clients):
                             "Ventes : %{value}<br>"
                             "Pourcentage : %{percent}<extra></extra>" 
             )
-    fig_pie_market.update_layout(showlegend= False, margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', title_font= dict(size= 8), font= dict(size= 8), width = 290, height = 280)
+    fig_pie_market.update_layout(showlegend= False, margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', title_font= dict(size= 8), font= dict(size= 8), width = 370, height = 280)
     
     # 7.3. Graphique en Bar pour afficher les SD selon la city choisie
     market_choose = df_city_sd.groupby("Market", as_index= False)["Purchases_Qty"].sum()
     fig_bar_marketSelect = px.bar(market_choose, x="Market", y="Purchases_Qty", color="Market", text="Purchases_Qty", title="Markets Situation")
     fig_bar_marketSelect.update_traces(textposition = 'outside')
-    fig_bar_marketSelect.update_layout(margin=dict(l=20, r=20, t=40, b=20), paper_bgcolor = '#F8F9FA', showlegend= False, width = 590, height = 290)
+    fig_bar_marketSelect.update_layout(margin=dict(l=20, r=20, t=40, b=20), paper_bgcolor = '#F8F9FA', showlegend= False, width = 790, height = 290)
     fig_bar_marketSelect.update_xaxes(tickfont = dict(size= 8))
     
     
@@ -1244,7 +1244,7 @@ def filter_data(debut, fin, produit, city, models, clients):
                             "Ventes : %{value}<br>"
                             "Pourcentage : %{percent}<extra></extra>" 
             )
-    fig_pie_marketSelect.update_layout(showlegend= False, margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', title_font= dict(size= 8), font= dict(size= 8), width = 290, height = 280)
+    fig_pie_marketSelect.update_layout(showlegend= False, margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', title_font= dict(size= 8), font= dict(size= 8), width = 370, height = 280)
 
     # 8. Graphique en Pie pour afficher les SD selon la city choisie
     fig_pie_citySelect = go.Figure(data = [go.Pie(labels = city_choose["Customers_Name"], values= city_choose["Purchases_Qty"], hole = 0.4, textinfo= "none", hoverinfo="skip", title = "Proportions for SD by city", opacity=0.5)])
