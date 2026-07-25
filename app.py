@@ -43,7 +43,7 @@ link_style = {
     "color"          : "#495057",
 }
 
-server = app.server
+#server = app.server
 # 🔑 Clé secrète obligatoire pour les sessions
 #server.secret_key = "une_cle_ultra_secrete_a_changer"
 
