@@ -12,8 +12,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, "tecno_database.db")
 
 # Remarque : 4 slashs "sqlite:////" pour indiquer un chemin absolu sous Linux
-engine = create_engine(f"sqlite:////{DB_PATH}")
-#engine = create_engine(f"sqlite:///{DB_PATH}")
+engine = create_engine(f"sqlite:///{DB_PATH}")
 
 # 1. Configuration de la classe de base
 
