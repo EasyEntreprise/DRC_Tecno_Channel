@@ -1,19 +1,19 @@
 """
 
 """
-from sqlalchemy import create_engine, Column, Integer, String, Float
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 import os
-from sqlalchemy import create_engine
+from sqlalchemy import Column, Float, Integer, String, create_engine
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 # Obtenir le dossier absolu courant (le dossier database/)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Chemin complet vers le fichier SQLite
-DB_PATH = os.path.join(BASE_DIR, "tecno_database.db")  # Remplace par le nom exact de ton fichier .db
+DB_PATH = os.path.join(BASE_DIR, "tecno_database.db")
 
-# Instanciation de l'engine avec le chemin absolu (remarque les 4 slashs pour sqlite:///)
-engine = create_engine(f"sqlite:///{DB_PATH}")
+# Remarque : 4 slashs "sqlite:////" pour indiquer un chemin absolu sous Linux
+engine = create_engine(f"sqlite:////{DB_PATH}")
+#engine = create_engine(f"sqlite:///{DB_PATH}")
 
 # 1. Configuration de la classe de base
 
@@ -103,9 +103,6 @@ class SDTecnoFPData(Base):
 
 
 # --- EXECUTION / CREATION DES TABLES ---
-
-# Remplacez l'URL par celle de votre base de donnees 
-#engine = create_engine(f"sqlite:///{DB_PATH}", echo = True)
 
 # Cette ligne remplace la "CREATE TABLE IF NOT EXISTS" pour toutes les tables difinies ci-dessus
 Base.metadata.create_all(engine)
