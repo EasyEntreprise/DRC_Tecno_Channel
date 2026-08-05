@@ -5,7 +5,7 @@ import pandas as pd
 engine = create_engine("sqlite:///data/tecno_database.db")
 
 # Lecture du fichier Excel
-df = pd.read_excel("data/Tecno_FP_SD_dataset.xlsx")
+df = pd.read_excel("data/Tecno_FP_SD_dataset.xlsx", skiprows=1)
 
 with engine.begin() as conn:
 

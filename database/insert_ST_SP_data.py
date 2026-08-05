@@ -3,7 +3,7 @@ from sqlalchemy import text
 from connectDB import engine
 
 # Lecture du fichier Excel
-df_excel = pd.read_excel("data/Tecno_SP_ST_dataset.xlsx")
+df_excel = pd.read_excel("data/Tecno_SP_ST_dataset.xlsx", skiprows=1) # skiprows=1, permet de supprimer la premiere ligne de notre fichier Excel
 
 #df_excel["Date"] = pd.to_datetime(df_excel["Date"]).dt.strftime("%Y-%m-%d")
 #df_excel["Months"] = pd.to_datetime(df_excel["Months"]).dt.strftime("%Y-%m-%d")
