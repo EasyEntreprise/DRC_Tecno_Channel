@@ -745,12 +745,12 @@ def filtrer_et_analyser_donnees(debut, fin, produit, series, models):
 
     # B.3. Graphique en boite a moustache
     prime = df_filtre.groupby(["City", "Date"], as_index= False)["Purchased_Qty"].sum()
-    fig_box_chan = px.box(prime, x="City", y="Purchased_Qty", color="City", title="Sales breakdown by City", points= "outliers")
+    fig_box_chan = px.box(prime, x="City", y="Purchased_Qty", color="City", title="ST-SP Sales breakdown by City", points= "outliers")
     fig_box_chan.update_layout(showlegend= False, height= 360, width= 400, margin=dict(l=20, r=20, t=50, b=20), paper_bgcolor = '#F8F9FA')
 
     # B.4. Graphique en Histogram pour channel
     prime_city = df_filtre.groupby("Date", as_index= False)["Purchased_Qty"].sum()
-    fig_hist = px.histogram(prime_city, x= "Purchased_Qty", nbins= 30, title="Breakdown of Purchased Qty", labels= {"Purchased_Qty":"Purchasesd Quantity"}, barmode= "overlay")
+    fig_hist = px.histogram(prime_city, x= "Purchased_Qty", nbins= 30, title="ST-SP Breakdown of Purchased Qty", labels= {"Purchased_Qty":"Purchasesd Quantity"}, barmode= "overlay")
     fig_hist.update_layout(height= 360, width= 470, xaxis_title= "Purchased Qty", yaxis_title = "Frequency", margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA')
 
     # B.5. Graphique en nuage au point pour comparer les prix par rappor a la vente
@@ -769,13 +769,13 @@ def filtrer_et_analyser_donnees(debut, fin, produit, series, models):
 
     # B.6. Graphique en Line sur la situation mensuelle
     monthly = df_filtre.groupby("Months", as_index= False)["Purchased_Qty"].sum()
-    monthly_fig = px.line(monthly , x="Months", y="Purchased_Qty", text= "Purchased_Qty", title="Monthly Sell FOR ST-SP")
+    monthly_fig = px.line(monthly , x="Months", y="Purchased_Qty", text= "Purchased_Qty", title="ST-SP Monthly Sell FOR ST-SP")
     monthly_fig.update_traces(textposition = 'top center')
     monthly_fig.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 1180, height = 300)
 
     # B.7. Graphique en Line sur la situation semestriel
     weekly = df_filtre.groupby("Date", as_index= False)["Purchased_Qty"].sum()
-    weekly_fig = px.line(weekly , x="Date", y="Purchased_Qty", text= "Purchased_Qty", title="Weekly Sell FOR ST-SP")
+    weekly_fig = px.line(weekly , x="Date", y="Purchased_Qty", text= "Purchased_Qty", title="ST-SP Weekly Sell FOR ST-SP")
     weekly_fig.update_traces(textposition = 'top center')
     weekly_fig.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 1180, height = 300)
 
@@ -798,7 +798,7 @@ def filtrer_et_analyser_donnees(debut, fin, produit, series, models):
 
     # B.11. Graphique en Line par models par mois
     model_line = df_all_models.groupby(["Products", "Months"], as_index= False)["Purchased_Qty"].sum()
-    model_line_fig = px.line(model_line , x="Months", y="Purchased_Qty", color = "Products", text= "Purchased_Qty", title="Monthly Purchases by models")
+    model_line_fig = px.line(model_line , x="Months", y="Purchased_Qty", color = "Products", text= "Purchased_Qty", title="ST-SP Monthly Purchases by models")
     model_line_fig.update_traces(textposition = 'top center')
     model_line_fig.update_layout(margin = dict(l=20, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 670, height = 300)
 
@@ -811,7 +811,7 @@ def filtrer_et_analyser_donnees(debut, fin, produit, series, models):
 
     # B.13. Graphique en Line par models par weeks
     model_weeks = df_all_models.groupby(["Products", "Date"], as_index= False)["Purchased_Qty"].sum()
-    model_weeks_fig = px.line(model_weeks , x="Date", y="Purchased_Qty", color = "Products", text= "Purchased_Qty", title="Weekly Purchases by models")
+    model_weeks_fig = px.line(model_weeks , x="Date", y="Purchased_Qty", color = "Products", text= "Purchased_Qty", title="ST-SP Weekly Purchases by models")
     model_weeks_fig.update_traces(textposition = 'top center')
     model_weeks_fig.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 1180, height = 300)
   
