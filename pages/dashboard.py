@@ -119,11 +119,11 @@ weekly_st_sp_fig.update_traces(textposition = 'top center')
 weekly_st_sp_fig.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 880, height = 280)
 
 channel_st_sp = year_st_sp.groupby("City", as_index= False)["Purchased_Qty"].sum()
-channel_st_sp_pie = go.Figure(data = [go.Pie(labels = channel_st_sp["City"], values= channel_st_sp["Purchased_Qty"], title = "Channel Proportions for SP", opacity=0.5)])
+channel_st_sp_pie = go.Figure(data = [go.Pie(labels = channel_st_sp["City"], values= channel_st_sp["Purchased_Qty"], title = "Channel Proportions for ST-SP", opacity=0.5)])
 channel_st_sp_pie.update_traces (hoverinfo='label+percent', textfont_size=15,textinfo= 'label+percent', pull= [0.05, 0, 0, 0, 0],marker_line=dict(color='#FFFFFF', width=2))
 channel_st_sp_pie.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 338, height = 300)
 
-channel_st_sp_bar = px.bar(channel_st_sp, x="City", y="Purchased_Qty", color="City", title="Channel Situation for SP", text = "Purchased_Qty",)
+channel_st_sp_bar = px.bar(channel_st_sp, x="City", y="Purchased_Qty", color="City", title="Channel Situation for ST-SP", text = "Purchased_Qty",)
 channel_st_sp_bar.update_traces(textposition = 'outside')
 channel_st_sp_bar.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 490, height = 300)
 
@@ -139,11 +139,11 @@ weekly_st_fp_fig.update_traces(textposition = 'top center')
 weekly_st_fp_fig.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 880, height = 280)
 
 channel_st_fp = year_st_fp.groupby("City", as_index= False)["Purchased_Qty"].sum()
-channel_st_fp_pie = go.Figure(data = [go.Pie(labels = channel_st_fp["City"], values= channel_st_fp["Purchased_Qty"], title = "Channel Proportions for FP", opacity=0.5)])
+channel_st_fp_pie = go.Figure(data = [go.Pie(labels = channel_st_fp["City"], values= channel_st_fp["Purchased_Qty"], title = "Channel Proportions for ST-FP", opacity=0.5)])
 channel_st_fp_pie.update_traces (hoverinfo='label+percent', textfont_size=15,textinfo= 'label+percent', pull= [0.05, 0, 0, 0, 0],marker_line=dict(color='#FFFFFF', width=2))
 channel_st_fp_pie.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 338, height = 300)
 
-channel_st_fp_bar = px.bar(channel_st_fp, x="City", y="Purchased_Qty", color="City", title="Channel Situation for FP", text = "Purchased_Qty",)
+channel_st_fp_bar = px.bar(channel_st_fp, x="City", y="Purchased_Qty", color="City", title="Channel Situation for ST-FP", text = "Purchased_Qty",)
 channel_st_fp_bar.update_traces(textposition = 'outside')
 channel_st_fp_bar.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 490, height = 300)
 
@@ -156,7 +156,7 @@ monthly_sd_sp_fig.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgc
 
 # 9. Graphic Bar pour SD SP
 cities_sd_sp = year_sd_sp.groupby("Cities", as_index= False)["Purchases_Qty"].sum()
-cities_sd_sp_fig = px.bar(cities_sd_sp, x="Cities", y="Purchases_Qty", color="Cities", title="Sub-Dealers Situation for SP", text = "Purchases_Qty",)
+cities_sd_sp_fig = px.bar(cities_sd_sp, x="Cities", y="Purchases_Qty", color="Cities", title="Sub-Dealers Situation for SD-SP", text = "Purchases_Qty",)
 cities_sd_sp_fig.update_traces(textposition = 'outside')
 cities_sd_sp_fig.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 580, height = 280)
 
@@ -193,18 +193,18 @@ this_month_sd_fp = year_sd_fp[year_sd_fp["Monthly"] == mois]
 # C.A. SMART PHONE
 # C.A.1. Graphic line line de ST SP par semaine
 sp_line_st = this_month_st_sp.groupby("Weeks", as_index= False)["Purchased_Qty"].sum()
-sp_line_st_fig = px.line(sp_line_st, x="Weeks", y="Purchased_Qty", text= "Purchased_Qty", title=f"ST-{annee}-{mois} for SMART PHONE (Weekly Situation)")
+sp_line_st_fig = px.line(sp_line_st, x="Weeks", y="Purchased_Qty", text= "Purchased_Qty", title=f"ST-{annee}-{mois} for ST-SMART PHONE (Weekly Situation)")
 sp_line_st_fig.update_traces(textposition = 'top center')
 sp_line_st_fig.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 1180, height = 290)
 
 # C.A.2. Le graphic en bar pour Channel ST SP
 sp_line_st_bar = this_month_st_sp.groupby("City", as_index= False)["Purchased_Qty"].sum()
-sp_line_st_bar_fig = px.bar(sp_line_st_bar, x= "City", y= "Purchased_Qty", color="City", title="Channel Situation for SP", text = "Purchased_Qty",)
+sp_line_st_bar_fig = px.bar(sp_line_st_bar, x= "City", y= "Purchased_Qty", color="City", title="Channel Situation for ST-SP", text = "Purchased_Qty",)
 sp_line_st_bar_fig.update_traces(textposition = 'outside')
 sp_line_st_bar_fig.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 390, height = 280)
 
 # C.A.3. Le graphic en Pie pour Channel ST SP
-chan_sd_sp_pie = go.Figure(data = [go.Pie(labels = this_month_st_sp["City"], values= this_month_st_sp["Purchased_Qty"], title = "Channel Proportions for SP", opacity=0.5)])
+chan_sd_sp_pie = go.Figure(data = [go.Pie(labels = this_month_st_sp["City"], values= this_month_st_sp["Purchased_Qty"], title = "Channel Proportions for ST-SP", opacity=0.5)])
 chan_sd_sp_pie.update_traces (hoverinfo='percent', textfont_size=15,textinfo= 'percent', pull= [0.05, 0, 0, 0, 0],textposition= 'inside', marker_line=dict(color='#FFFFFF', width=2))
 chan_sd_sp_pie.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 360, height = 300)
 
@@ -216,19 +216,19 @@ citi_sd_sp_pie.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolo
 
 # C.A.5. Le graphic en bar pour model SP
 sp_model_sd_bar = this_month_sd_sp.groupby("Products", as_index= False)["Purchases_Qty"].sum()
-sp_model_sd_bar_fig = px.bar(sp_model_sd_bar, x= "Products", y= "Purchases_Qty", color="Products", title="Models Situation for SP", text = "Purchases_Qty",)
+sp_model_sd_bar_fig = px.bar(sp_model_sd_bar, x= "Products", y= "Purchases_Qty", color="Products", title="Models Situation for SD-SP", text = "Purchases_Qty",)
 sp_model_sd_bar_fig.update_traces(textposition = 'outside')
 sp_model_sd_bar_fig.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 800, height = 280)
 
 # C.A.6. Le graphic en Pie pour serie SP
 sp_serie_sd = this_month_sd_sp.groupby("SERIES", as_index= False)["Purchases_Qty"].sum()
-series_sd_fp_pie = go.Figure(data = [go.Pie(labels = sp_serie_sd["SERIES"], values= sp_serie_sd["Purchases_Qty"], title = "Series Proportions for SP", opacity=0.5)])
+series_sd_fp_pie = go.Figure(data = [go.Pie(labels = sp_serie_sd["SERIES"], values= sp_serie_sd["Purchases_Qty"], title = "Series Proportions for SD-SP", opacity=0.5)])
 series_sd_fp_pie.update_traces (hoverinfo='percent', textfont_size=15,textinfo= 'percent', pull= [0.05, 0, 0, 0, 0],textposition= 'inside', marker_line=dict(color='#FFFFFF', width=2))
 series_sd_fp_pie.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', title_font= dict(size= 16), font= dict(size= 8), width = 380, height = 280)
 
 # C.A.7. Le graphic en bar pour clients SP
 sp_subD_bar = this_month_sd_sp.groupby("Customers_Name", as_index= False)["Purchases_Qty"].sum()
-sp_subD_bar_fig = px.bar(sp_subD_bar, x= "Customers_Name", y= "Purchases_Qty", color="Customers_Name", title="Sub-Dealers Situation for SP", text = "Purchases_Qty",)
+sp_subD_bar_fig = px.bar(sp_subD_bar, x= "Customers_Name", y= "Purchases_Qty", color="Customers_Name", title="Sub-Dealers Situation for SD-SP", text = "Purchases_Qty",)
 sp_subD_bar_fig.update_traces(textposition = 'outside')
 sp_subD_bar_fig.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', title_font= dict(size= 14), font= dict(size= 5), width = 800, height = 380)
 
@@ -240,18 +240,18 @@ clients_sd_sp_pie.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgc
 # C.B. FEAUTRE PHONE
 # C.B.1. Graphic line line de ST FP par semaine
 fp_line_st = this_month_st_fp.groupby("Weeks", as_index= False)["Purchased_Qty"].sum()
-fp_line_st_fig = px.line(fp_line_st, x="Weeks", y="Purchased_Qty", text= "Purchased_Qty", title=f"ST-{annee}-{mois} for FEATURE PHONE (Weekly Situation)")
+fp_line_st_fig = px.line(fp_line_st, x="Weeks", y="Purchased_Qty", text= "Purchased_Qty", title=f"ST-{annee}-{mois} for ST-FEATURE PHONE (Weekly Situation)")
 fp_line_st_fig.update_traces(textposition = 'top center')
 fp_line_st_fig.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 1180, height = 290)
 
 # C.B.2. Le graphic en bar pour Channel ST FP
 fp_line_st_bar = this_month_st_fp.groupby("City", as_index= False)["Purchased_Qty"].sum()
-fp_line_st_bar_fig = px.bar(fp_line_st_bar, x= "City", y= "Purchased_Qty", color="City", title="Channel Situation for SP", text = "Purchased_Qty",)
+fp_line_st_bar_fig = px.bar(fp_line_st_bar, x= "City", y= "Purchased_Qty", color="City", title="Channel Situation for ST-FP", text = "Purchased_Qty",)
 fp_line_st_bar_fig.update_traces(textposition = 'outside')
 fp_line_st_bar_fig.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 390, height = 280)
 
 # C.B.3. Le graphic en Pie pour Channel ST FP
-chan_sd_fp_pie = go.Figure(data = [go.Pie(labels = this_month_st_fp["City"], values= this_month_st_fp["Purchased_Qty"], title = "Channel Proportions for FP", opacity=0.5)])
+chan_sd_fp_pie = go.Figure(data = [go.Pie(labels = this_month_st_fp["City"], values= this_month_st_fp["Purchased_Qty"], title = "Channel Proportions for ST-FP", opacity=0.5)])
 chan_sd_fp_pie.update_traces (hoverinfo='percent', textfont_size=15,textinfo= 'percent', pull= [0.05, 0, 0, 0, 0],textposition= 'inside', marker_line=dict(color='#FFFFFF', width=2))
 chan_sd_fp_pie.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 300, height = 300)
 
@@ -263,7 +263,7 @@ citi_sd_fp_pie.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolo
 
 # C.B.5. Le graphic en bar pour model FP
 fp_model_sd_bar = this_month_sd_fp.groupby("Products", as_index= False)["Purchases_Qty"].sum()
-fp_model_sd_bar_fig = px.bar(fp_model_sd_bar, x= "Products", y= "Purchases_Qty", color="Products", title="Models Situation for FP", text = "Purchases_Qty",)
+fp_model_sd_bar_fig = px.bar(fp_model_sd_bar, x= "Products", y= "Purchases_Qty", color="Products", title="Models Situation for SD-FP", text = "Purchases_Qty",)
 fp_model_sd_bar_fig.update_traces(textposition = 'outside')
 fp_model_sd_bar_fig.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 800, height = 280)
 
@@ -274,12 +274,12 @@ fp_model_sd_pie_fig.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_b
 
 # C.B.7. Le graphic en bar pour clients FP
 fp_subD_bar = this_month_sd_fp.groupby("Customers_Name", as_index= False)["Purchases_Qty"].sum()
-fp_subD_bar_fig = px.bar(fp_subD_bar, x= "Customers_Name", y= "Purchases_Qty", color="Customers_Name", title="Sub-Dealers Situation for FP", text = "Purchases_Qty",)
+fp_subD_bar_fig = px.bar(fp_subD_bar, x= "Customers_Name", y= "Purchases_Qty", color="Customers_Name", title="Sub-Dealers Situation for SD-FP", text = "Purchases_Qty",)
 fp_subD_bar_fig.update_traces(textposition = 'outside')
 fp_subD_bar_fig.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', title_font= dict(size= 16), font= dict(size= 8), width = 800, height = 280)
 
 # C.B.8. Le graphic en Pie pour clients FP
-clients_sd_fp_pie = go.Figure(data = [go.Pie(labels = fp_subD_bar["Customers_Name"], values= fp_subD_bar["Purchases_Qty"], title = "Sub-Dealers Proportions for FP", opacity=0.5)])
+clients_sd_fp_pie = go.Figure(data = [go.Pie(labels = fp_subD_bar["Customers_Name"], values= fp_subD_bar["Purchases_Qty"], title = "Sub-Dealers Proportions for SD-FP", opacity=0.5)])
 clients_sd_fp_pie.update_traces (hoverinfo='percent', textfont_size=15,textinfo= 'percent', pull= [0.05, 0, 0, 0, 0],textposition= 'inside', marker_line=dict(color='#FFFFFF', width=2))
 clients_sd_fp_pie.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', title_font= dict(size= 16), font= dict(size= 8), width = 380, height = 280)
 

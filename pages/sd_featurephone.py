@@ -60,7 +60,7 @@ sd_fp_year_fig.update_layout(
 
 # 2. Create a DataFrame for sub-dealer evolution by years
 sub_dealer_evolution = sd_data_fp.groupby("Years", as_index= False)["Customers_Name"].nunique()
-fig_sd_evolution = px.line(sub_dealer_evolution, x="Years", y="Customers_Name", text="Customers_Name", title="Evolution of Sub-dealers by Years")
+fig_sd_evolution = px.line(sub_dealer_evolution, x="Years", y="Customers_Name", text="Customers_Name", title="Evolution of Sub-dealers FP by Years")
 fig_sd_evolution.update_traces(textposition = 'top center')
 fig_sd_evolution.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 570, height = 300)
 
@@ -103,7 +103,7 @@ def layout():
                     span= 6,
                     children= dmc.Paper(
                         children = [
-                            dmc.Title("SD YEARLY SITUATION", order= 5, style={"marginBottom": 15}),
+                            dmc.Title("SD-FP YEARLY SITUATION", order= 5, style={"marginBottom": 15}),
                             dcc.Graph(figure = sd_fp_year_fig)
 
                         ], 
@@ -115,7 +115,7 @@ def layout():
                     span = 6,
                     children= dmc.Paper(
                         children = [
-                            dmc.Title("SD QUANTITY BY YEARS", order= 5, style={"marginBottom": 15}),
+                            dmc.Title("SD-FP QUANTITY BY YEARS", order= 5, style={"marginBottom": 15}),
                             dcc.Graph(figure= fig_sd_evolution)
 
                         ], 
@@ -156,7 +156,7 @@ def layout():
                                     span = 12,
                                     children= dmc.Paper(
                                         children= [
-                                            dmc.Text("SD Qty for KINSHASA", c="dimmed", size= "sm"),
+                                            dmc.Text("SD-FP Qty for KINSHASA", c="dimmed", size= "sm"),
                                             dmc.Text(id = "metric-SD-KIN_fp", size="xl", fw=700),
                                         ], withBorder= True, p= "md", shadow= "xs",
                                     )
@@ -166,7 +166,7 @@ def layout():
                                     span = 12,
                                     children= dmc.Paper(
                                         children= [
-                                            dmc.Text("SD Qty for KATANGA", c="dimmed", size= "sm"),
+                                            dmc.Text("SD-FP Qty for KATANGA", c="dimmed", size= "sm"),
                                             dmc.Text(id = "metric-SD-KAT_fp", size="xl", fw=700),
                                         ], withBorder= True, p= "md", shadow= "xs",
                                     )
@@ -176,7 +176,7 @@ def layout():
                                     span = 12,
                                     children= dmc.Paper(
                                         children= [
-                                            dmc.Text("SD Qty for KONGO-CENTRAL", c="dimmed", size= "sm"),
+                                            dmc.Text("SD-FP Qty for KONGO-CENTRAL", c="dimmed", size= "sm"),
                                             dmc.Text(id = "metric-SD-KC_fp", size="xl", fw=700),
                                         ], withBorder= True, p= "md", shadow= "xs",
                                     )
@@ -186,7 +186,7 @@ def layout():
                                     span = 12,
                                     children= dmc.Paper(
                                         children= [
-                                            dmc.Text("SD Qty for BIG-KASAI", c="dimmed", size= "sm"),
+                                            dmc.Text("SD-FP Qty for BIG-KASAI", c="dimmed", size= "sm"),
                                             dmc.Text(id = "metric-SD-BK_fp", size="xl", fw=700),
                                         ], withBorder= True, p= "md", shadow= "xs",
                                     )
@@ -196,7 +196,7 @@ def layout():
                                     span = 12,
                                     children= dmc.Paper(
                                         children= [
-                                            dmc.Text("SD Qty for BIG-EQUATOR", c="dimmed", size= "sm"),
+                                            dmc.Text("SD-FP Qty for BIG-EQUATOR", c="dimmed", size= "sm"),
                                             dmc.Text(id = "metric-SD-BE_fp", size="xl", fw=700),
                                         ], withBorder= True, p= "md", shadow= "xs",
                                     )
@@ -1129,7 +1129,7 @@ def filter_data(debut, fin, produit, city, models, clients):
     fig_bar_city.update_layout(margin=dict(l=20, r=20, t=40, b=20), paper_bgcolor = '#F8F9FA', showlegend= False, width = 430, height = 290)
 
     # 2. Graphic en Pie par city
-    fig_pie_city = go.Figure(data = [go.Pie(labels = bar_city["Cities"], values= bar_city["Purchases_Qty"], title = "City Proportions for SD-SP", opacity=0.5)])
+    fig_pie_city = go.Figure(data = [go.Pie(labels = bar_city["Cities"], values= bar_city["Purchases_Qty"], title = "City Proportions for SD-FP", opacity=0.5)])
     fig_pie_city.update_traces (hoverinfo='percent', textfont_size=15,textinfo= 'percent', pull= [0.05, 0, 0, 0, 0],textposition= 'inside', marker_line=dict(color='#FFFFFF', width=2))
     fig_pie_city.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', title_font= dict(size= 16), font= dict(size= 8), width = 430, height = 280)
 
@@ -1141,12 +1141,12 @@ def filter_data(debut, fin, produit, city, models, clients):
 
     # 4. Graphic en Boite a moustache 
     prime = df_filtre.groupby(["Cities", "Date"], as_index= False)["Purchases_Qty"].sum()
-    fig_boite_moust = px.box(prime, x="Cities", y="Purchases_Qty", color="Cities", title="Purchases breakdown by City", points= "outliers")
+    fig_boite_moust = px.box(prime, x="Cities", y="Purchases_Qty", color="Cities", title="SD-FP Purchases breakdown by City", points= "outliers")
     fig_boite_moust.update_layout(showlegend= False, height= 290, width= 445, margin=dict(l=20, r=20, t=50, b=20), paper_bgcolor = '#F8F9FA')
 
     # 5. Graphic en Histogramme 
     prime_sd = df_filtre.groupby("Customers_Name", as_index= False)["Purchases_Qty"].sum()
-    fig_hist_spD = px.histogram(prime_sd, x= "Purchases_Qty", nbins= 30, title="Breakdown of Purchased Qty", labels= {"Purchased_Qty":"Purchasesd Quantity"})
+    fig_hist_spD = px.histogram(prime_sd, x= "Purchases_Qty", nbins= 30, title="Breakdown of SD-FP Purchased Qty", labels= {"Purchased_Qty":"Purchasesd Quantity"})
     fig_hist_spD.update_layout(height= 290, width= 445, xaxis_title= "Purchases Qty", yaxis_title = "Frequency", margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA')
 
     # 6. Graphique en nuage au point pour comparer les prix par rappor a la vente
@@ -1164,20 +1164,20 @@ def filter_data(debut, fin, produit, city, models, clients):
 
     # 7. Graphique en Bar pour afficher les SD selon la city choisie
     city_choose = df_city_sd.groupby("Customers_Name", as_index= False)["Purchases_Qty"].sum()
-    fig_bar_citySelect = px.bar(city_choose, x="Customers_Name", y="Purchases_Qty", color="Customers_Name", text="Purchases_Qty", title="Sub-Dealers by City")
+    fig_bar_citySelect = px.bar(city_choose, x="Customers_Name", y="Purchases_Qty", color="Customers_Name", text="Purchases_Qty", title="Sub-Dealers FP by City")
     fig_bar_citySelect.update_traces(textposition = 'outside')
     fig_bar_citySelect.update_layout(margin=dict(l=20, r=20, t=40, b=20), paper_bgcolor = '#F8F9FA', showlegend= False, width = 590, height = 290)
     fig_bar_citySelect.update_xaxes(tickfont = dict(size= 8))
 
     # 7.1. Graphique en Bar pour afficher touts les markets
     markets = df_filtre.groupby("Market", as_index= False)["Purchases_Qty"].sum()
-    fig_bar_market = px.bar(markets, x="Market", y="Purchases_Qty", color="Market", text="Purchases_Qty", title="Markets Situation")
+    fig_bar_market = px.bar(markets, x="Market", y="Purchases_Qty", color="Market", text="Purchases_Qty", title="SD-FP Markets Situation")
     fig_bar_market.update_traces(textposition = 'outside')
     fig_bar_market.update_layout(margin=dict(l=20, r=20, t=40, b=20), paper_bgcolor = '#F8F9FA', showlegend= False, width = 790, height = 290)
     fig_bar_market.update_xaxes(tickfont = dict(size= 8))
 
     # 7.2. Graphique en Pie pour afficher touts les markets
-    fig_pie_market = go.Figure(data = [go.Pie(labels = markets["Market"], values= markets["Purchases_Qty"], hole = 0.4, textinfo= "none", hoverinfo="skip", title = "Proportions for SD by Market", opacity=0.5)])
+    fig_pie_market = go.Figure(data = [go.Pie(labels = markets["Market"], values= markets["Purchases_Qty"], hole = 0.4, textinfo= "none", hoverinfo="skip", title = "Proportions for SD-FP by Market", opacity=0.5)])
     fig_pie_market.update_traces (
             textinfo = "none", # Ne rien afficher sur le graphic
             hovertemplate = "<b>%{label}</b><br>"
@@ -1188,7 +1188,7 @@ def filter_data(debut, fin, produit, city, models, clients):
 
     # 7.3. Graphique en Bar pour afficher les SD selon la city choisie
     market_choose = df_city_sd.groupby("Market", as_index= False)["Purchases_Qty"].sum()
-    fig_bar_marketSelect = px.bar(market_choose, x="Market", y="Purchases_Qty", color="Market", text="Purchases_Qty", title="Markets Situation")
+    fig_bar_marketSelect = px.bar(market_choose, x="Market", y="Purchases_Qty", color="Market", text="Purchases_Qty", title="SD-FP Markets Situation")
     fig_bar_marketSelect.update_traces(textposition = 'outside')
     fig_bar_marketSelect.update_layout(margin=dict(l=20, r=20, t=40, b=20), paper_bgcolor = '#F8F9FA', showlegend= False, width = 790, height = 290)
     fig_bar_marketSelect.update_xaxes(tickfont = dict(size= 8))
@@ -1196,7 +1196,7 @@ def filter_data(debut, fin, produit, city, models, clients):
 
     # 7.4. Graphique en Pie pour afficher les SD selon la city choisie
     
-    fig_pie_marketSelect = go.Figure(data = [go.Pie(labels = market_choose["Market"], values= market_choose["Purchases_Qty"], hole = 0.4, textinfo= "none", hoverinfo="skip", title = "Proportions by Market", opacity=0.5)])
+    fig_pie_marketSelect = go.Figure(data = [go.Pie(labels = market_choose["Market"], values= market_choose["Purchases_Qty"], hole = 0.4, textinfo= "none", hoverinfo="skip", title = "SD-FP Proportions by Market", opacity=0.5)])
     fig_pie_marketSelect.update_traces (
             textinfo = "none", # Ne rien afficher sur le graphic
             hovertemplate = "<b>%{label}</b><br>"
@@ -1206,7 +1206,7 @@ def filter_data(debut, fin, produit, city, models, clients):
     fig_pie_marketSelect.update_layout(showlegend= False, margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', title_font= dict(size= 8), font= dict(size= 8), width = 370, height = 280)
     
     # 8. Graphique en Pie pour afficher les SD selon la city choisie
-    fig_pie_citySelect = go.Figure(data = [go.Pie(labels = city_choose["Customers_Name"], values= city_choose["Purchases_Qty"], hole = 0.4, textinfo= "none", hoverinfo="skip", title = "Proportions for SD by city", opacity=0.5)])
+    fig_pie_citySelect = go.Figure(data = [go.Pie(labels = city_choose["Customers_Name"], values= city_choose["Purchases_Qty"], hole = 0.4, textinfo= "none", hoverinfo="skip", title = "Proportions for SD-FP by city", opacity=0.5)])
     fig_pie_citySelect.update_traces (
         textinfo = "none", # Ne rien afficher sur le graphic
         hovertemplate = "<b>%{label}</b><br>"
@@ -1228,7 +1228,7 @@ def filter_data(debut, fin, produit, city, models, clients):
 
     # 10. Graphique en Bar pour all models
     bar_modeles = df_filtre.groupby("Products", as_index= False)["Purchases_Qty"].sum()
-    fig_bar_models = px.bar(bar_modeles, x="Products", y="Purchases_Qty", color="Products", text="Purchases_Qty", title="Models Situation")
+    fig_bar_models = px.bar(bar_modeles, x="Products", y="Purchases_Qty", color="Products", text="Purchases_Qty", title="SD-FP Models Situation")
     fig_bar_models.update_traces(textposition = 'outside')
     fig_bar_models.update_layout(margin=dict(l=20, r=20, t=40, b=20), paper_bgcolor = '#F8F9FA', showlegend= False, width = 1180, height = 290)
 
@@ -1236,7 +1236,7 @@ def filter_data(debut, fin, produit, city, models, clients):
     # 11. Graphique en Line pour all plusieurs modeles par mois
     
     multi_model = df_all_models_multi.groupby(["Date", "Products"], as_index= False)["Purchases_Qty"].sum()
-    fig_line_modelMulti = px.line(multi_model , x="Date", y="Purchases_Qty", text= "Purchases_Qty", color="Products", title="Monthly Purchase by Models")
+    fig_line_modelMulti = px.line(multi_model , x="Date", y="Purchases_Qty", text= "Purchases_Qty", color="Products", title="SD-FP Monthly Purchase by Models")
     fig_line_modelMulti.update_traces(textposition = 'top center')
     fig_line_modelMulti.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 1180, height = 300)
 
@@ -1261,20 +1261,20 @@ def filter_data(debut, fin, produit, city, models, clients):
     df_clients_years = sd_data_fp[sd_data_fp["Customers_Name"] == clients]
     
     sd_years = df_clients_years.groupby("Years", as_index= False)["Purchases_Qty"].sum()
-    sd_years_line = px.line(sd_years , x="Years", y="Purchases_Qty", text= "Purchases_Qty", title="Yearly Purchase")
+    sd_years_line = px.line(sd_years , x="Years", y="Purchases_Qty", text= "Purchases_Qty", title="SD-FP Yearly Purchase")
     sd_years_line.update_traces(textposition = 'top center')
     sd_years_line.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 1180, height = 300)
 
 
     # 14. Graphique en Line pour afficher les achats mensuels
     client_model = df_clients.groupby("Date", as_index= False)["Purchases_Qty"].sum()
-    client_line_model = px.line(client_model , x="Date", y="Purchases_Qty", text= "Purchases_Qty", title="Monthly Purchase")
+    client_line_model = px.line(client_model , x="Date", y="Purchases_Qty", text= "Purchases_Qty", title="SD-FP Monthly Purchase")
     client_line_model.update_traces(textposition = 'top center')
     client_line_model.update_layout(margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', width = 1180, height = 300)
 
     # 15. Graphique en Bar pour afficher les modeles
     client_modeles = df_clients.groupby("Products", as_index= False)["Purchases_Qty"].sum()
-    client_bar_models = px.bar(client_modeles, x="Products", y="Purchases_Qty", color="Products", text="Purchases_Qty", title="Models Situation")
+    client_bar_models = px.bar(client_modeles, x="Products", y="Purchases_Qty", color="Products", text="Purchases_Qty", title="SD-FP Models Situation")
     client_bar_models.update_traces(textposition = 'outside')
     client_bar_models.update_layout(margin=dict(l=20, r=20, t=40, b=20), paper_bgcolor = '#F8F9FA', showlegend= False, width = 1180, height = 290)
 
