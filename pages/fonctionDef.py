@@ -223,7 +223,7 @@ def create_metric_card4(title, value, is_positive = True, icon_name = "fluent:co
                         children= [
                             dmc.Group(
                                 [
-                                    DashIconify(icon = trend_icon, width= 14)
+                                    DashIconify(icon = trend_icon, width= 14),
                                 ],
                                 gap= 4,
                                 align= "center"

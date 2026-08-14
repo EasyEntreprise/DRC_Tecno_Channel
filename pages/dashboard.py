@@ -685,9 +685,9 @@ def layout(): # Fonction principale se trouvant dans chaque page lors d'un multi
                             children = [
                                 # Grille pour aligner plusieurs cartes de manière responsive
                                 create_metric_card2("A SD-SP Qty", f"{nbr_sd_sp} A SD", is_positive= True, icon_name= "fluent:person-24-regular"),
-                                create_metric_card2("Total Purchase ST-SP", f"{achat_sd_sp} Pcs", is_positive= True, icon_name="fluent:storage-24-regular"),
+                                create_metric_card("Total Purchase SD-SP", f"{achat_sd_sp} Pcs", f"{variation_y_sd_sp}", is_positive= True, icon_name= "fluent:archive-24-regular"),
                                 create_metric_card2("A SD-FP Qty", f"{nbr_sd_fp} A SD", is_positive= True, icon_name="fluent:person-24-regular"),
-                                create_metric_card2("Total Purchase ST-FP", f"{achat_sd_fp} Pcs", is_positive= True, icon_name="fluent:storage-24-regular"),
+                                create_metric_card("Total Purchase SD-FP", f"{achat_sd_fp} Pcs", f"{variation_y_sd_fp}", is_positive= True, icon_name= "fluent:archive-24-regular"),
                             ]
                         ),
                         withBorder= True,
@@ -766,10 +766,11 @@ def layout(): # Fonction principale se trouvant dans chaque page lors d'un multi
                             gap = "md",
                             children = [
                                 # Grille pour aligner plusieurs cartes de manière responsive
-                                create_metric_card4("Total Purchase ST-SP", f"{achat_st_sp_tt} Pcs", is_positive= True, icon_name= "fluent:storage-24-regular"),
+                                #create_metric_card4("Total Purchase ST-SP", f"{achat_st_sp_tt} Pcs", is_positive= True, icon_name= "fluent:storage-24-regular"),
+                                create_metric_card("Total Purchase ST-SP", f"{achat_st_sp_tt} Pcs", f"{variation_m_st_sp}", is_positive= True, icon_name= "fluent:archive-24-regular"),
                             ]
                         ), 
-                        withBorder= True, p="md", style={**style_boite, "height": "100px"})
+                        withBorder= True, p="md", style={**style_boite, "height": "220px"})
                 ),
 
                 # Metric pour SD SP
@@ -780,10 +781,10 @@ def layout(): # Fonction principale se trouvant dans chaque page lors d'un multi
                             gap = "md",
                             children = [
                                 # Grille pour aligner plusieurs cartes de manière responsive
-                                create_metric_card4("Total Purchase SD-SP", f"{achat_sd_sp_tt} Pcs", is_positive= True, icon_name="fluent:storage-24-regular"),
+                                create_metric_card("Total Purchase SD-SP", f"{achat_sd_sp_tt} Pcs", f"{variation_m_sd_sp}", is_positive= True, icon_name="fluent:archive-24-regular"),
                             ]
                         ), 
-                        withBorder= True, p="md", style={**style_boite, "height": "100px"})
+                        withBorder= True, p="md", style={**style_boite, "height": "220px"})
                 ),
 
                 # Metric pour ST FP
@@ -794,10 +795,10 @@ def layout(): # Fonction principale se trouvant dans chaque page lors d'un multi
                             gap = "md",
                             children = [
                                 # Grille pour aligner plusieurs cartes de manière responsive
-                                create_metric_card4("Total Purchase ST-FP", f"{achat_st_fp_tt} Pcs", is_positive= True, icon_name="fluent:storage-24-regular"),
+                                create_metric_card("Total Purchase ST-FP", f"{achat_st_fp_tt} Pcs", f"{variation_m_st_fp}", is_positive= True, icon_name="fluent:archive-24-regular"),
                             ]
                         ), 
-                        withBorder= True, p="md", style={**style_boite, "height": "100px"})
+                        withBorder= True, p="md", style={**style_boite, "height": "220px"})
                 ),
 
                 # Metric pour SD FP
@@ -808,10 +809,10 @@ def layout(): # Fonction principale se trouvant dans chaque page lors d'un multi
                             gap = "md",
                             children = [
                                 # Grille pour aligner plusieurs cartes de manière responsive
-                                create_metric_card4("Total Purchase SD-FP", f"{achat_sd_fp_tt} Pcs", is_positive= True, icon_name="fluent:storage-24-regular"),
+                                create_metric_card("Total Purchase SD-FP", f"{achat_sd_fp_tt} Pcs", f"{variation_m_sd_fp}", is_positive= True, icon_name="fluent:storage-24-regular"),
                             ]
                         ), 
-                        withBorder= True, p="md", style={**style_boite, "height": "100px"})
+                        withBorder= True, p="md", style={**style_boite, "height": "220px"})
                 ),
 
                 dmc.Title("III.1. SMART PHONE", order = 4, style={"marginBottom": 15}),
