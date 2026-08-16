@@ -1341,10 +1341,12 @@ def filter_data(debut, fin, produit, city, models, clients):
     ####################################################
     # Préparation des données pour VOTRE DataTable
     ####################################################
-    tableau = df_filtre.groupby(["Cities", "Customers_Name"], as_index= False)["Purchases_Qty"].sum()
+    tableauOne = df_filtre.groupby(["Cities", "Customers_Name"], as_index= False)["Purchases_Qty"].sum()
+    tableau = tableauOne.sort_values(by="Purchases_Qty", ascending= False)
     donnees_tableau = tableau.to_dict("records")
     
-    tableau2 = df_all_models_multi.groupby(["Customers_Name", "Products"], as_index= False)["Purchases_Qty"].sum()
+    tableauTwo = df_all_models_multi.groupby(["Customers_Name", "Products"], as_index= False)["Purchases_Qty"].sum()
+    tableau2 = tableauTwo.sort_values(by="Purchases_Qty", ascending= False)
     donnees_tableau2 = tableau2.to_dict("records")
 
 
