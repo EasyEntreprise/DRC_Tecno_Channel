@@ -170,9 +170,9 @@ def filter_data_st_sp(debut_one, fin_one, debut_two, fin_two, produit):
     best_week_one    = best_st_sp_one["Purchased_Qty"].max()
     bad_week_one     = best_st_sp_one["Purchased_Qty"].min()
     
-    txt_achat_one    = f"{total_achat_one:,.2f} Pcs"
-    txt_bestWeek_one = f"{best_week_one :,.2f} Pcs"
-    txt_badWeek_one  = f"{bad_week_one:,.2f} Pcs"
+    txt_achat_one    = f"{total_achat_one} Pcs"
+    txt_bestWeek_one = f"{best_week_one } Pcs"
+    txt_badWeek_one  = f"{bad_week_one} Pcs"
 
     ## Statistiques #####
     statis_st_sp_one    = df_filtre_one.groupby("Months", as_index= False)["Purchased_Qty"].sum()

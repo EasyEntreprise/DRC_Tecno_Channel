@@ -162,9 +162,9 @@ def filter_data_st_fp(debut_one, fin_one, debut_two, fin_two, produit_2):
     best_week_st_fp_one    = best_st_fp_one["Purchased_Qty"].max()
     bad_week_st_fp_one     = best_st_fp_one["Purchased_Qty"].min()
     
-    txt_achat_st_fp_one    = f"{total_achat_st_fp_one:,.2f} Pcs"
-    txt_bestWeek_st_fp_one = f"{best_week_st_fp_one :,.2f} Pcs"
-    txt_badWeek_st_fp_one  = f"{bad_week_st_fp_one:,.2f} Pcs"
+    txt_achat_st_fp_one    = f"{total_achat_st_fp_one} Pcs"
+    txt_bestWeek_st_fp_one = f"{best_week_st_fp_one } Pcs"
+    txt_badWeek_st_fp_one  = f"{bad_week_st_fp_one} Pcs"
  
 
     ## Statistiques #####

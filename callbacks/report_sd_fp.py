@@ -170,7 +170,7 @@ def filter_data_sd_fp(debut_one, fin_one, debut_two, fin_two, clients_2):
     achat_sd_fp_one = df_sd_fp_one["Purchases_Qty"].sum()
     
     txt_qty_sd_fp_one    = f"{qty_sd_fp_one} A Sub-Dealers"
-    txt_achat_sd_fp_one  = f"{achat_sd_fp_one:,.2f} Pcs"
+    txt_achat_sd_fp_one  = f"{achat_sd_fp_one} Pcs"
 
     ## Statistiques #####
     statis_sd_fp_one    = df_sd_fp_one.groupby("Customers_Name", as_index= False)["Purchases_Qty"].sum()
@@ -186,7 +186,7 @@ def filter_data_sd_fp(debut_one, fin_one, debut_two, fin_two, clients_2):
     achat_sd_fp_two = df_sd_fp_two["Purchases_Qty"].sum()
     
     txt_qty_sd_fp_two    = f"{qty_sd_fp_two} A Sub-Dealers"
-    txt_achat_sd_fp_two  = f"{achat_sd_fp_two:,.2f} Pcs"
+    txt_achat_sd_fp_two  = f"{achat_sd_fp_two} Pcs"
 
     ## Statistiques #####
     statis_sd_fp_two    = df_sd_fp_two.groupby("Customers_Name", as_index= False)["Purchases_Qty"].sum()
