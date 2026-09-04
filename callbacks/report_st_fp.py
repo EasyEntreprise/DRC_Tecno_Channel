@@ -226,10 +226,10 @@ def filter_data_st_fp(debut_one, fin_one, debut_two, fin_two, produit_2):
         y="Purchased_Qty", 
         color="City",
         text="Purchased_Qty",
-        title="Channel-City situation for ST-SP"
+        title="Channel-City situation for ST-FP"
     )
     fig_bar_channel_st_fp_one.update_traces(textposition = 'outside')
-    fig_bar_channel_st_fp_one.update_layout(margin=dict(l=20, r=20, t=40, b=20), paper_bgcolor = '#F8F9FA', width = 380, height = 290)
+    fig_bar_channel_st_fp_one.update_layout(showlegend= False, margin=dict(l=20, r=20, t=40, b=20), paper_bgcolor = '#F8F9FA', width = 380, height = 290)
 
     # B.4. Graphique en Pie pour channel Kin et Lushi
     fig_pie_chan_st_fp_one = go.Figure(data = [go.Pie(labels = channel_st_fp_one["City"], values= channel_st_fp_one["Purchased_Qty"], title = "Channel-City Proportions for ST-FP", opacity=0.5)])
