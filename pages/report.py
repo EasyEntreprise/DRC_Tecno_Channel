@@ -550,7 +550,7 @@ def layout():
                                 span= 12,
                                 children = dmc.Paper(
                                     children=[
-                                        dmc.Text("Manimum Value", c="dimmed", size= "sm"),
+                                        dmc.Text("Minimun Value", c="dimmed", size= "sm"),
                                         dmc.Text(id= "minim-st-sp-one", size="xl", fw=700),
                                     ], 
                                     withBorder= True, p= "md", shadow= "xs",
@@ -616,7 +616,7 @@ def layout():
                                 span= 12,
                                 children = dmc.Paper(
                                     children=[
-                                        dmc.Text("Manimum Value", c="dimmed", size= "sm"),
+                                        dmc.Text("Minimun Value", c="dimmed", size= "sm"),
                                         dmc.Text(id= "minim-st-sp-two", size="xl", fw=700),
                                     ], 
                                     withBorder= True, p= "md", shadow= "xs",
@@ -984,7 +984,7 @@ def layout():
                                 span= 12,
                                 children = dmc.Paper(
                                     children=[
-                                        dmc.Text("Manimum Value", c="dimmed", size= "sm"),
+                                        dmc.Text("Minimun Value", c="dimmed", size= "sm"),
                                         dmc.Text(id= "minim-st-fp-one", size="xl", fw=700),
                                     ], 
                                     withBorder= True, p= "md", shadow= "xs",
@@ -1050,7 +1050,7 @@ def layout():
                                 span= 12,
                                 children = dmc.Paper(
                                     children=[
-                                        dmc.Text("Manimum Value", c="dimmed", size= "sm"),
+                                        dmc.Text("Minimun Value", c="dimmed", size= "sm"),
                                         dmc.Text(id= "minim-st-fp-two", size="xl", fw=700),
                                     ], 
                                     withBorder= True, p= "md", shadow= "xs",
