@@ -10,6 +10,7 @@ import plotly.graph_objects as go
 import dash_mantine_components as dmc
 from dash.dependencies import Input, Output
 from dash_iconify import DashIconify
+from plotly.subplots import make_subplots
 from pages.fonctionDef import create_metric_card, create_metric_card2, create_metric_card3, create_metric_card4
 
 #session = SessionLocal()
@@ -668,19 +669,45 @@ def filtrer_et_analyser_donnees(debut, fin, produit, models):
     fig_hist.update_layout(height= 360, width= 470, xaxis_title= "Purchased Qty", yaxis_title = "Frequency", margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA')
 
     # B.5. Graphique en nuage au point pour comparer les prix par rappor a la vente
+
+    fig_scatter = make_subplots(specs=[[{"secondary_y": True}]])
     
-    #df_model = df_all_model.groupby(["Products", "Prices_usd"], as_index= False)["Purchased_Qty"].sum()
-    df_model = (df_all_model.groupby(["Months", "Products"]).agg({"Prices_usd":"mean", "Purchased_Qty":"sum"}).reset_index())
-    fig_scatter = px.scatter(
-        df_model,
-        x= "Prices_usd",
-        y= "Purchased_Qty",
-        text= "Months",
-        hover_data= ["Products"],
-        title= f"Price vs Purchase - {produit}"
+    # Axe Y1 (Gauche) : Volume d'achats (Histogramme)
+    fig_scatter.add_trace(
+        go.Bar(
+            x= df_all_model["Weeks"],
+            y= df_all_model["Purchased_Qty"],
+            name="Purchases",
+            marker_color= 'royalblue',
+            opacity=0.6
+        ),
+        secondary_y= False
     )
-    fig_scatter.update_traces(textposition= "top center")
-    fig_scatter.update_layout(height= 300, width= 1180, xaxis_title= "Purchased Qty", yaxis_title = "Frequency", margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA')
+    
+    # Axe Y2 (Droite) : Evolution du prix (Ligne)
+    fig_scatter.add_trace(
+        go.Scatter(
+            x= df_all_model["Weeks"],
+            y= df_all_model["Prices_usd"],
+            name="Prices",
+            mode='lines+markers',
+            line=dict(color='firebrick', width=3)
+        ),
+        secondary_y=True
+    )
+    
+    # Mise en forme du graphique
+    fig_scatter.update_layout(
+        title= f"Impact of Price on Purchases - {produit}",
+        xaxis_title = "Weeks",
+        hovermode= "x unified",
+        template= "plotly_white"
+    )
+    
+    fig_scatter.update_yaxes(title_text="Purchasing Volume", secondary_y=False)
+    fig_scatter.update_yaxes(title_text="Prices ($)", secondary_y=True)
+    fig_scatter.update_layout(height= 300, width= 1180, margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA')
+
 
     # B.6. Graphique en Line sur la situation mensuelle
     monthly = df_filtre.groupby("Months", as_index= False)["Purchased_Qty"].sum()
