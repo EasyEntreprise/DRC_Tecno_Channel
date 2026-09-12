@@ -15,9 +15,10 @@ from pages.fonctionDef import create_metric_card, create_metric_card2, create_me
 #session = SessionLocal()
 
 try:
-    df_sd_sp = pd.read_sql_table("SD_tecno_SP_data", con= engine)
+    #df_sd_sp = pd.read_sql_table("SD_tecno_SP_data", con= engine)
+    df_sd_sp = pd.read_sql_query("SELECT Cities, Customers_Name, Market, Products, Categories, SERIES, Purchases_Qty, Investments_usd, Date, Months, Years FROM SD_tecno_SP_data", con= engine)
 
-    # df = pd.read_sql("SELECT * FROM SD_tecno_FP_data", con = session.bind)
+    # df = pd.read_sql("SELECT * FROM SD_tecno_SP_data", con = session.bind)
 
     # Traitement des valeurs manquantes
     sd_data_sp = df_sd_sp.dropna(subset="Purchases_Qty")
