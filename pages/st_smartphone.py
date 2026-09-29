@@ -755,15 +755,20 @@ def filtrer_et_analyser_donnees(debut, fin, produit, series, models):
     fig_hist = px.histogram(prime_city, x= "Purchased_Qty", nbins= 30, title="ST-SP Breakdown of Purchased Qty", labels= {"Purchased_Qty":"Purchasesd Quantity"}, barmode= "overlay")
     fig_hist.update_layout(height= 360, width= 470, xaxis_title= "Purchased Qty", yaxis_title = "Frequency", margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA')
 
+
+
     # B.5. Graphique en nuage au point pour comparer les prix par rappor a la vente
+
+    models_scatter = df_all_model.groupby(["Products", "Weeks", "Prices_usd"], as_index= False)["Purchased_Qty"].sum()
 
     fig_scatter = make_subplots(specs=[[{"secondary_y": True}]])
 
     # Axe Y1 (Gauche) : Volume d'achats (Histogramme)
+
     fig_scatter.add_trace(
         go.Bar(
-            x= df_all_model["Weeks"],
-            y= df_all_model["Purchased_Qty"],
+            x= models_scatter["Weeks"],
+            y= models_scatter["Purchased_Qty"],
             name="Purchases",
             marker_color= 'royalblue',
             opacity=0.6
@@ -774,8 +779,8 @@ def filtrer_et_analyser_donnees(debut, fin, produit, series, models):
     # Axe Y2 (Droite) : Evolution du prix (Ligne)
     fig_scatter.add_trace(
         go.Scatter(
-            x= df_all_model["Weeks"],
-            y= df_all_model["Prices_usd"],
+            x= models_scatter["Weeks"],
+            y= models_scatter["Prices_usd"],
             name="Prices",
             mode='lines+markers',
             line=dict(color='firebrick', width=3)
