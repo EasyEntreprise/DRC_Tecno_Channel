@@ -17,7 +17,7 @@ from pages.fonctionDef import create_metric_card, create_metric_card2, create_me
 
 try:
     #df_st_sp = pd.read_sql_table("ST_tecno_SP_data", con= engine)
-    df_st_sp = pd.read_sql_query("SELECT City, Products, Categories, SERIES, Weeks, Date, Months, Years, Purchased_Qty, Prices_usd FROM ST_tecno_SP_data", con= engine)
+    df_st_sp = pd.read_sql_query("SELECT City, Products, Categories, SERIES, Weeks, Date, Months, Years, Purchased_Qty, Prices_usd FROM ST_tecno_SP_data WHERE Purchased_Qty > 0", con= engine)
 
     # df = pd.read_sql("SELECT * FROM SD_tecno_FP_data", con = session.bind)
 

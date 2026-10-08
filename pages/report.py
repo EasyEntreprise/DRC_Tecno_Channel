@@ -15,10 +15,10 @@ from pages.fonctionDef import create_metric_card, create_metric_card2, create_me
 #session = SessionLocal()
 
 try:
-    df_st_fp = pd.read_sql_query("SELECT City, Products, Weeks, Date, Months, Years, Purchased_Qty, Prices_usd FROM ST_tecno_FP_data", con= engine)
-    df_st_sp = pd.read_sql_query("SELECT City, Products, Categories, SERIES, Weeks, Date, Months, Years, Purchased_Qty, Prices_usd FROM ST_tecno_SP_data", con= engine)
-    df_sd_fp = pd.read_sql_query("SELECT Cities, Customers_Name, Market, Products, Purchases_Qty, Investments_usd, Date, Months, Years FROM SD_tecno_FP_data", con= engine)
-    df_sd_sp = pd.read_sql_query("SELECT Cities, Customers_Name, Market, Products, Categories, SERIES, Purchases_Qty, Investments_usd, Date, Months, Years FROM SD_tecno_SP_data", con= engine)
+    df_st_fp = pd.read_sql_query("SELECT City, Products, Weeks, Date, Months, Years, Purchased_Qty, Prices_usd FROM ST_tecno_FP_data WHERE Purchased_Qty > 0", con= engine)
+    df_st_sp = pd.read_sql_query("SELECT City, Products, Categories, SERIES, Weeks, Date, Months, Years, Purchased_Qty, Prices_usd FROM ST_tecno_SP_data WHERE Purchased_Qty > 0", con= engine)
+    df_sd_fp = pd.read_sql_query("SELECT Cities, Customers_Name, Market, Products, Purchases_Qty, Investments_usd, Date, Months, Years FROM SD_tecno_FP_data WHERE Purchases_Qty > 0", con= engine)
+    df_sd_sp = pd.read_sql_query("SELECT Cities, Customers_Name, Market, Products, Categories, SERIES, Purchases_Qty, Investments_usd, Date, Months, Years FROM SD_tecno_SP_data WHERE Purchases_Qty > 0", con= engine)
 
     # df = pd.read_sql("SELECT * FROM SD_tecno_FP_data", con = session.bind)
 
