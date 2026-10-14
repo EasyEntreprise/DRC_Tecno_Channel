@@ -681,7 +681,12 @@ def filtrer_et_analyser_donnees(debut, fin, produit, models):
             y= models_scatter["Purchased_Qty"],
             name="Purchases",
             marker_color= 'royalblue',
-            opacity=0.6
+            opacity=0.6,
+
+            text = models_scatter["Purchased_Qty"],
+            texttemplate= "%{text:,0f}",
+            textposition = "outside",
+            textfont= dict(size=10)
         ),
         secondary_y= False
     )
@@ -694,6 +699,12 @@ def filtrer_et_analyser_donnees(debut, fin, produit, models):
             y= models_scatter["Prices_usd"],
             name="Prices",
             mode='lines+markers',
+            # ICI
+            text = models_scatter["Prices_usd"],
+            texttemplate="%{text:.2f}",
+            textposition="top center",
+            textfont = dict(size=10),
+            ####
             line=dict(color='firebrick', width=3)
         ),
         secondary_y=True
