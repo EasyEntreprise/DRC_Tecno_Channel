@@ -69,3 +69,5 @@ with engine.begin() as conn:
             )
 
 print("Synchronization complete !")
+
+#python .\database\insert_ST_FP_data.py

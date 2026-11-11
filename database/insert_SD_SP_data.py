@@ -63,3 +63,5 @@ with engine.begin() as conn:
             )
 
 print("Synchronization complete.")
+
+# python .\database\insert_SD_SP_data.py
