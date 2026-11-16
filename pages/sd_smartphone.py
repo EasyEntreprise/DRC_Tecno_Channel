@@ -1243,20 +1243,6 @@ def filter_data(debut, fin, produit, city, models, clients):
     fig_scatter.update_yaxes(title_text="Prices ($)", secondary_y=True)
     fig_scatter.update_layout(height= 290, width= 890, margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', uniformtext_minsize=8, uniformtext_mode="hide")
 
-
-    
-    #df_model = (df_all_model.groupby(["Date", "Products"]).agg({"Prices_usd":"mean", "Purchases_Qty":"sum"}).reset_index())
-    #fig_scatter = px.scatter(
-        #df_model,
-        #x= "Prices_usd",
-        #y= "Purchases_Qty",
-        #text= "Date",
-        #hover_data= ["Products"],
-        #title= f"Price vs Purchase - {produit}"
-    #)
-    #fig_scatter.update_traces(textposition= "top center")
-    #fig_scatter.update_layout(height= 290, width= 890, xaxis_title= "Purchased Qty", yaxis_title = "Frequency", margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA')
-
     # 7. Graphique en Bar pour afficher les SD selon la city choisie
     city_choose = df_city_sd.groupby("Customers_Name", as_index= False)["Purchases_Qty"].sum()
     fig_bar_citySelect = px.bar(city_choose, x="Customers_Name", y="Purchases_Qty", color="Customers_Name", text="Purchases_Qty", title="Sub-Dealers SP by City")
