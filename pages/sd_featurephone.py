@@ -10,6 +10,7 @@ import plotly.graph_objects as go
 import dash_mantine_components as dmc
 from dash.dependencies import Input, Output
 from dash_iconify import DashIconify
+from plotly.subplots import make_subplots
 from pages.fonctionDef import create_metric_card, create_metric_card2, create_metric_card3, create_metric_card4
 
 #session = SessionLocal()
@@ -1151,17 +1152,56 @@ def filter_data(debut, fin, produit, city, models, clients):
     fig_hist_spD.update_layout(height= 290, width= 445, xaxis_title= "Purchases Qty", yaxis_title = "Frequency", margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA')
 
     # 6. Graphique en nuage au point pour comparer les prix par rappor a la vente
-    df_model = (df_all_model.groupby(["Date", "Products"]).agg({"Prices_usd":"mean", "Purchases_Qty":"sum"}).reset_index())
-    fig_scatter = px.scatter(
-        df_model,
-        x= "Prices_usd",
-        y= "Purchases_Qty",
-        text= "Date",
-        hover_data= ["Products"],
-        title= f"Price vs Purchase - {produit}"
+    models_scatter = df_all_model.groupby(["Products", "Date", "Prices_usd"], as_index= False)["Purchases_Qty"].sum()
+    
+    fig_scatter = make_subplots(specs=[[{"secondary_y": True}]])
+        
+    # Axe Y1 (Gauche) : Volume d'achats (Histogramme)
+    fig_scatter.add_trace(
+        go.Bar(
+            x= models_scatter["Date"],
+            y= models_scatter["Purchases_Qty"],
+            name="Purchases",
+            marker_color= 'royalblue',
+            opacity=0.6, 
+        
+            text = models_scatter["Purchases_Qty"],
+            texttemplate= "%{text:,0f}",
+            textposition = "outside",
+            textfont= dict(size=10)
+        ),
+        secondary_y= False
     )
-    fig_scatter.update_traces(textposition= "top center")
-    fig_scatter.update_layout(height= 290, width= 890, xaxis_title= "Purchased Qty", yaxis_title = "Frequency", margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA')
+    
+    # Axe Y2 (Droite) : Evolution du prix (Ligne)
+    fig_scatter.add_trace(
+        go.Scatter(
+            x= models_scatter["Date"],
+            y= models_scatter["Prices_usd"],
+            name="Prices",
+            mode='lines+markers',
+            # ICI
+            text = models_scatter["Prices_usd"],
+            texttemplate="%{text:.2f}",
+            textposition="top center",
+            textfont = dict(size=10),
+            ####
+            line=dict(color='firebrick', width=3)
+        ),
+        secondary_y=True
+    )
+        
+    # Mise en forme du graphique
+    fig_scatter.update_layout(
+        title= f"Impact of Price on Purchases - {produit}",
+        xaxis_title = "Date",
+        hovermode= "x unified",
+        template= "plotly_white"
+    )
+    
+    fig_scatter.update_yaxes(title_text="Purchasing Volume", secondary_y=False)
+    fig_scatter.update_yaxes(title_text="Prices ($)", secondary_y=True)
+    fig_scatter.update_layout(height= 290, width= 890, margin = dict(l=10, r=10, t=30, b=10), paper_bgcolor = '#F8F9FA', uniformtext_minsize=8, uniformtext_mode="hide")
 
     # 7. Graphique en Bar pour afficher les SD selon la city choisie
     city_choose = df_city_sd.groupby("Customers_Name", as_index= False)["Purchases_Qty"].sum()
